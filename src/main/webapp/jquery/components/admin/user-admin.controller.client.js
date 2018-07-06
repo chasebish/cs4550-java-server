@@ -1,8 +1,10 @@
 (function () {
     $(main);
+    var $idFld;
     var $usernameFld, $passwordFld;
-    var $removeBtn, $updateBtn, $createBtn;
+    var $updateBtn, $createBtn, $searchBtn;
     var $firstNameFld, $lastNameFld;
+    var $emailFld, $phoneFld, $dobFld;
     var $roleFld;
     var $userRowTemplate, $tbody;
     var userService = new AdminUserServiceClient();
@@ -14,18 +16,20 @@
      * Binds action icons, such as create, update, select, and delete, to respective event handlers.
      */
     function main() { 
-        $usernameFld=$('#usernameFld');
-        $passwordFld=$('#passwordFld');
-        $firstNameFld=$('#firstNameFld');
-        $lastNameFld=$('#lastNameFld');
+        $idFld=$('#idFld');
+        $usernameFld=$('#usernameFld'), $passwordFld=$('#passwordFld');
+        $firstNameFld=$('#firstNameFld'), $lastNameFld=$('#lastNameFld');
+        $emailFld=$('#emailFld'), $phoneFld=$('#phoneFld'), $dobFld=$('#dobFld');
         $roleFld=$('#roleFld');
         $tbody = $('.wbdv-tbody');
         $userRowTemplate = $('.wbdv-template.wbdv-user').clone().removeClass('wbdv-hidden');
         $createBtn = $('.wbdv-create');
         $createBtn.click(createUser);
         $updateBtn = $('.wbdv-update');
-        $updateBtn.click(updateUser)
-        userService.findAllUsers(renderUsers);
+        $updateBtn.click(updateUser);
+
+        // Renders all current users
+        findAllUsers(renderUsers);
     }
 
     /**
@@ -39,8 +43,11 @@
             password: $passwordFld.val(),
             firstName: $firstNameFld.val(),
             lastName: $lastNameFld.val(),
+            email: $emailFld.val(),
+            phone: $phoneFld.val(),
+            dateOfBirth: $dobFld.val(),
             role: $roleFld.val()
-        })
+        }, setTimeout(function(){ findAllUsers(renderUsers); }, 100))
     }
 
     /**
@@ -62,14 +69,9 @@
      * Handles delete user event when user clicks the cross icon. Reads the user is from the icon id attribute. Uses
      * user service deleteUser() to send a delete request to the server. Updates user list on server response.
      */
-    function deleteUser() { 
-        userService.deleteUser();
+    function deleteUser(eventData) { 
+        userService.deleteUser(eventData.data[0])
     }
-
-    /**
-     * 
-     */
-    function selectUser() {  }
 
     /**
      * handles update user event when user clicks on check mark icon. Reads the user is from the icon id attribute.
@@ -93,9 +95,9 @@
     function renderUser(user) {  }
 
     /**
-     * accepts an array of user instances, clears the current content of the table body, iterates over the array of users,
+     * Accepts an array of user instances, clears the current content of the table body, iterates over the array of users,
      * clones a table row template for each user instance, populates the table row with the user object properties, adds
-     * the table row to the table body
+     * the table row to the table body.
      * @param {*} users 
      */
     function renderUsers(users) {
@@ -103,10 +105,17 @@
         for(var u in users) {
             var user = users[u];
             var $row = $userRowTemplate.clone();
+            $row.find('.wbdv-id').html(user.id);
             $row.find('.wbdv-username').html(user.username);
+            $row.find('.wbdv-password').html('********');
             $row.find('.wbdv-first-name').html(user.firstName);
             $row.find('.wbdv-last-name').html(user.lastName);
+            $row.find('.wbdv-email').html(user.email);
+            $row.find('.wbdv-phone').html(user.phone);
+            $row.find('.wbdv-dob').html(user.dateOfBirth);
             $row.find('.wbdv-role').html(user.role);
+            $row.find('.wbdv-remove').click([user.id], deleteUser)
+            // $row.find('.wbdv-edit').click(select)
             $tbody.append($row);
         }
     }

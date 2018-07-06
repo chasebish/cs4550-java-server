@@ -7,13 +7,14 @@ function AdminUserServiceClient() {
     this.url = 'http://localhost:8080/api/user';
     var self = this;
 
-    function createUser(user) {
+    function createUser(user, callback) {
         return fetch(self.url, {
             method: 'POST',
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            success: callback
         });
     }
 
@@ -40,9 +41,9 @@ function AdminUserServiceClient() {
     }
 
     function deleteUser(userId) {
-        return fetch(self.url + '/' + userId,
-            { method: 'DELETE' }
-        );
+        // return fetch(self.url + '/' + userId,
+        //     { method: 'DELETE' }
+        // );
     }
      
 }
