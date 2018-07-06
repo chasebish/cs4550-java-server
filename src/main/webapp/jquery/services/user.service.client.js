@@ -39,9 +39,8 @@ function AdminUserServiceClient() {
         });
     }
 
-    function deleteUser(userId, callback) {
-        return fetch(
-            self.url + '/' + userId,
+    function deleteUser(userId) {
+        return fetch(self.url + '/' + userId,
             { method: 'DELETE' }
         );
     }

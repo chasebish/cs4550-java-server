@@ -7,6 +7,12 @@
     var $userRowTemplate, $tbody;
     var userService = new AdminUserServiceClient();
 
+
+    /**
+     * Executes on document load, when the browser is done parsing the html page and the dom is ready. Retrieved
+     * the dom elements needed later in the controller such as the form elements, action icons, and templates.
+     * Binds action icons, such as create, update, select, and delete, to respective event handlers.
+     */
     function main() { 
         $usernameFld=$('#usernameFld');
         $passwordFld=$('#passwordFld');
@@ -20,7 +26,13 @@
         $updateBtn = $('.wbdv-update');
         $updateBtn.click(updateUser)
         userService.findAllUsers(renderUsers);
-     }
+    }
+
+    /**
+     * Handles create user event when user clicks on plus icon. Reads from the form elements and creates a user
+     * object. Uses the user service createUser() function to create the new user. Updates the list of users on
+     * server response.
+     */
     function createUser() {
         userService.createUser({
             username: $usernameFld.val(),
@@ -30,18 +42,72 @@
             role: $roleFld.val()
         })
     }
-    function findAllUsers() {  }
+
+    /**
+     * Called whenever the list of users needs to be refreshed. Uses user service findAllUsers() to retrieve all
+     * the users and passes response to renderUsers.
+     */
+    function findAllUsers() { 
+        userService.findAllUsers(renderUsers);
+    }
+
+    /**
+     * Called whenever a particular user needs to be retrieved by their id, as in when a user is selected for editing.
+     * Reads the user is from the icon id attribute. Uses user service findUserById() to retrieve user and then
+     * updates the form on server response.
+     */
     function findUserById() {  }
-    function deleteUser() {  }
+
+    /**
+     * Handles delete user event when user clicks the cross icon. Reads the user is from the icon id attribute. Uses
+     * user service deleteUser() to send a delete request to the server. Updates user list on server response.
+     */
+    function deleteUser() { 
+        userService.deleteUser();
+    }
+
+    /**
+     * 
+     */
     function selectUser() {  }
-    function updateUser() { console.log('hello world') }
+
+    /**
+     * handles update user event when user clicks on check mark icon. Reads the user is from the icon id attribute.
+     * Reads new user values form the form, creates a user object and then uses user service updateUser() to send
+     * the new user data to server. Updates user list on server response
+     */
+    function updateUser() { 
+        userService.updateUser(id, {
+            username: $usernameFld.val(),
+            password: $passwordFld.val(),
+            firstName: $firstNameFld.val(),
+            lastName: $lastNameFld.val(),
+            role: $roleFld.val()
+        }) 
+    }
+
+    /**
+     * Accepts a user object as parameter and updates the form with the user properties
+     * @param {*} user 
+     */
     function renderUser(user) {  }
+
+    /**
+     * accepts an array of user instances, clears the current content of the table body, iterates over the array of users,
+     * clones a table row template for each user instance, populates the table row with the user object properties, adds
+     * the table row to the table body
+     * @param {*} users 
+     */
     function renderUsers(users) {
         $tbody.empty();
         for(var u in users) {
             var user = users[u];
             var $row = $userRowTemplate.clone();
             $row.find('.wbdv-username').html(user.username);
+            $row.find('.wbdv-first-name').html(user.firstName);
+            $row.find('.wbdv-last-name').html(user.lastName);
+            $row.find('.wbdv-role').html(user.role);
             $tbody.append($row);
-        }}
+        }
+    }
 })();
