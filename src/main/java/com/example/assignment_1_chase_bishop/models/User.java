@@ -16,6 +16,18 @@ public class User {
 	private String role;
 	private String dateOfBirth;
 	
+
+	public void setUser(User newUser) {
+		this.username = newUser.username != null ? newUser.username : this.username;
+		this.password = newUser.password != null ? newUser.password : this.password;
+		this.firstName = newUser.firstName != null ? newUser.firstName : this.firstName;
+		this.lastName = newUser.lastName != null ? newUser.lastName : this.lastName;
+		this.phone = newUser.phone != null ? newUser.phone : this.phone;
+		this.email = newUser.email != null ? newUser.email : this.email;
+		this.role = newUser.role != null ? newUser.role : this.role;
+		this.dateOfBirth = newUser.dateOfBirth != null ? newUser.dateOfBirth : this.dateOfBirth;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
