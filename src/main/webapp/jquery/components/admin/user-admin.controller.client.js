@@ -22,13 +22,13 @@
         userService.findAllUsers(renderUsers);
      }
     function createUser() {
-        userService.createUser(JSON.stringify({
-            username: $usernameFld.val,
-            password: $passwordFld.val,
-            firstName: $firstNameFld.val,
-            lastName: $lastNameFld.val,
-            role: $roleFld.val
-        }))
+        userService.createUser({
+            username: $usernameFld.val(),
+            password: $passwordFld.val(),
+            firstName: $firstNameFld.val(),
+            lastName: $lastNameFld.val(),
+            role: $roleFld.val()
+        })
     }
     function findAllUsers() {  }
     function findUserById() {  }

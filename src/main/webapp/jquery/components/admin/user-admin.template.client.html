@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="user-admin.style.client.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../services/user.service.client.js"></script>
+    <script src="../../services/user.service.client.js"></script>
     <script src="user-admin.controller.client.js"></script>
 </head>
 
@@ -25,16 +25,16 @@
             </tr>
             <tr class="wbdv-form">
                 <td>
-                    <input id="usernameFld" class="form-control" placeholder="Username" />
+                    <input id="usernameFld" type="text" class="form-control" placeholder="Username" />
                 </td>
                 <td>
-                    <input id="passwordFld" class="form-control" placeholder="Password" />
+                    <input id="passwordFld" type="password" class="form-control" placeholder="Password" />
                 </td>
                 <td>
-                    <input id="firstNameFld" class="form-control" placeholder="First Name" />
+                    <input id="firstNameFld" type="text" class="form-control" placeholder="First Name" />
                 </td>
                 <td>
-                    <input id="lastNameFld" class="form-control" placeholder="Last Name" />
+                    <input id="lastNameFld" type="text" class="form-control" placeholder="Last Name" />
                 </td>
                 <td>
                     <select id="roleFld" class="form-control">
@@ -45,9 +45,9 @@
                 </td>
                 <td>
                     <span class="float-right" style="white-space: nowrap">
-                        <i class="fa-2x fa fa-search wbdv-search"></i>
-                        <i class="fa-2x fa fa-plus wbdv-create"></i>
-                        <i class="fa-2x fa fa-check wbdv-update"></i>
+                        <button class="fa-2x fa fa-search wbdv-search"></button>
+                        <button class="fa-2x fa fa-plus wbdv-create"></button>
+                        <button class="fa-2x fa fa-check wbdv-update"></button>
                     </span>
                 </td>
             </tr>

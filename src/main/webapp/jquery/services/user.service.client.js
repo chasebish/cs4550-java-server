@@ -10,7 +10,10 @@ function AdminUserServiceClient() {
     function createUser(user) {
         return fetch(self.url, {
             method: 'POST',
-            body: JSON.stringify(user)
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
     }
 
@@ -29,7 +32,10 @@ function AdminUserServiceClient() {
     function updateUser(userId, user) {
         return fetch(self.url + '/' + userId, {
             method: 'PUT',
-            body: JSON.stringify(user)
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
     }
 
