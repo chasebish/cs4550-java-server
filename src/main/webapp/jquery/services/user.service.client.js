@@ -1,4 +1,4 @@
-function UserServiceClient() {
+function AdminUserServiceClient() {
     this.createUser = createUser;
     this.findAllUsers = findAllUsers;
     this.findUserById = findUserById;
@@ -44,7 +44,7 @@ function UserServiceClient() {
 
 function UserService() {
     this.register = register;
-    ...
-    function register() { ... }
+    
+    function register() {  }
   }
   

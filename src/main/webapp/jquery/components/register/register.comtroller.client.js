@@ -4,6 +4,6 @@
     var userService = new UserService();
     $(main);
 
-    function main() { … }
-    function register() { … }
+    function main() {  }
+    function register() {  }
 })();
