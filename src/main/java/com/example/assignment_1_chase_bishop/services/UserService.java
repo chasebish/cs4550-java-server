@@ -40,7 +40,7 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
-	@DeleteMapping("/api/user")
+	@DeleteMapping("/api/user/{userId}")
 	public void deleteUser(@PathVariable("userId") int id) {
 		userRepository.deleteById(id);
 	}
