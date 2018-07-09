@@ -13,80 +13,76 @@
 </head>
 
 <body>
-    <h1>User Admin</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Date of Birth</th>
-                <th>Role</th>
-                <th>&nbsp;</th>
-            </tr>
-            <tr class="wbdv-form">
-                <td>
-                    <input id="idFld" type="text" class="form-control" placeholder="Id" />
-                </td>
-                <td>
-                    <input id="usernameFld" type="text" class="form-control" placeholder="Username" />
-                </td>
-                <td>
-                    <input id="passwordFld" type="password" class="form-control" placeholder="Password" />
-                </td>
-                <td>
-                    <input id="firstNameFld" type="text" class="form-control" placeholder="First Name" />
-                </td>
-                <td>
-                    <input id="lastNameFld" type="text" class="form-control" placeholder="Last Name" />
-                </td>
-                <td>
-                    <input id="emailFld" type="email" class="form-control" placeholder="Email" />
-                </td>
-                <td>
-                    <input id="phoneFld" class="form-control" placeholder="Phone" />
-                </td>
-                <td>
-                    <input id="dobFld" type="date" class="form-control" placeholder="Date of Birth" />
-                </td>
-                <td>
-                    <select id="roleFld" class="form-control">
-                        <option value="FACULTY">Faculty</option>
-                        <option value="STUDENT">Student</option>
-                        <option value="ADMIN">Admin</option>
-                    </select>
-                </td>
-                <td>
-                    <span class="float-right" style="white-space: nowrap">
-                        <i class="fa-2x fa fa-search wbdv-search"></i>
-                        <i class="fa-2x fa fa-plus wbdv-create"></i>
-                        <i class="fa-2x fa fa-check wbdv-update"></i>
-                    </span>
-                </td>
-            </tr>
-            <tbody class="wbdv-tbody">
-                <tr class="wbdv-template wbdv-user wbdv-hidden">
-                    <td class="wbdv-id"></td>
-                    <td class="wbdv-username"></td>
-                    <td class="wbdv-password"></td>
-                    <td class="wbdv-first-name"></td>
-                    <td class="wbdv-last-name"></td>
-                    <td class="wbdv-email"></td>
-                    <td class="wbdv-phone"></td>
-                    <td class="wbdv-dob"></td>
-                    <td class="wbdv-role"></td>
-                    <td class="wbdv-actions">
-                        <span class="float-right">
-                            <button id="wbdv-remove" class="fa-2x fa fa-times wbdv-remove"></button>
-                            <button id="wbdv-edit" class="fa-2x fa fa-pencil wbdv-edit"></button>
+    <div>
+        <h1>User Admin</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Date of Birth</th>
+                    <th>Role</th>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr class="wbdv-form">
+                    <td>
+                        <input id="usernameFld" type="text" class="form-control" placeholder="Username" />
+                    </td>
+                    <td>
+                        <input id="passwordFld" type="password" class="form-control" placeholder="Password" />
+                    </td>
+                    <td>
+                        <input id="firstNameFld" type="text" class="form-control" placeholder="First Name" />
+                    </td>
+                    <td>
+                        <input id="lastNameFld" type="text" class="form-control" placeholder="Last Name" />
+                    </td>
+                    <td>
+                        <input id="emailFld" type="email" class="form-control" placeholder="Email" />
+                    </td>
+                    <td>
+                        <input id="phoneFld" class="form-control" placeholder="Phone" />
+                    </td>
+                    <td>
+                        <input id="dobFld" type="date" class="form-control" placeholder="Date of Birth" />
+                    </td>
+                    <td>
+                        <select id="roleFld" class="form-control">
+                            <option value="FACULTY">Faculty</option>
+                            <option value="STUDENT">Student</option>
+                            <option value="ADMIN">Admin</option>
+                        </select>
+                    </td>
+                    <td>
+                        <span class="float-right" style="white-space: nowrap">
+                            <button class="fa-2x fa fa-search wbdv-search"></button>
+                            <button class="fa-2x fa fa-plus wbdv-create"></button>
+                            <button class="fa-2x fa fa-check wbdv-update"></button>
                         </span>
                     </td>
                 </tr>
-            </tbody>
-    </table>
-
+                <tbody class="wbdv-tbody">
+                    <tr class="wbdv-template wbdv-user wbdv-hidden">
+                        <td class="wbdv-username"></td>
+                        <td class="wbdv-password"></td>
+                        <td class="wbdv-first-name"></td>
+                        <td class="wbdv-last-name"></td>
+                        <td class="wbdv-email"></td>
+                        <td class="wbdv-phone"></td>
+                        <td class="wbdv-dob"></td>
+                        <td class="wbdv-role"></td>
+                        <td class="wbdv-actions">
+                            <span class="float-right">
+                                <button id="wbdv-remove" class="fa-2x fa fa-times wbdv-remove"></button>
+                                <button id="wbdv-edit" class="fa-2x fa fa-pencil wbdv-edit"></button>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+        </table>
+    </div>
 </body>

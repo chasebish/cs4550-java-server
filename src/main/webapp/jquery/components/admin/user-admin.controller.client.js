@@ -1,6 +1,5 @@
 (function () {
     $(main)
-    var $idFld
     var $usernameFld, $passwordFld
     var $updateBtn, $createBtn, $searchBtn
     var $firstNameFld, $lastNameFld
@@ -15,12 +14,12 @@
      * the dom elements needed later in the controller such as the form elements, action icons, and templates.
      * Binds action icons, such as create, update, select, and delete, to respective event handlers.
      */
-    function main() { 
-        $idFld=$('#idFld')
-        $usernameFld=$('#usernameFld'), $passwordFld=$('#passwordFld')
-        $firstNameFld=$('#firstNameFld'), $lastNameFld=$('#lastNameFld')
-        $emailFld=$('#emailFld'), $phoneFld=$('#phoneFld'), $dobFld=$('#dobFld')
-        $roleFld=$('#roleFld')
+    function main() {
+
+        $usernameFld = $('#usernameFld'), $passwordFld=$('#passwordFld')
+        $firstNameFld = $('#firstNameFld'), $lastNameFld=$('#lastNameFld')
+        $emailFld = $('#emailFld'), $phoneFld=$('#phoneFld'), $dobFld=$('#dobFld')
+        $roleFld =$ ('#roleFld')
         $tbody = $('.wbdv-tbody')
         $userRowTemplate = $('.wbdv-template.wbdv-user').clone().removeClass('wbdv-hidden')
         $createBtn = $('.wbdv-create')
@@ -29,7 +28,7 @@
         $updateBtn.click(updateUser)
 
         // Renders all current users
-        findAllUsers(renderUsers)
+        findAllUsers()
     }
 
     /**
@@ -38,32 +37,22 @@
      * server response.
      */
     function createUser() {
-
-        if ($idFld.val() !== '') {
-            alert('ID field must be left blank for new users.')
-        } else {
-            userService.createUser({
-                username: $usernameFld.val(),
-                password: $passwordFld.val(),
-                firstName: $firstNameFld.val(),
-                lastName: $lastNameFld.val(),
-                email: $emailFld.val(),
-                phone: $phoneFld.val(),
-                dateOfBirth: $dobFld.val(),
-                role: $roleFld.val()
-            },
-            setTimeout(function(){ 
-                findAllUsers(renderUsers)
-                resetFields()
-            }, 100))
-        }
+        userService.createUser({
+            username: $usernameFld.val(),
+            password: $passwordFld.val(),
+            firstName: $firstNameFld.val(),
+            lastName: $lastNameFld.val(),
+            email: $emailFld.val(),
+            phone: $phoneFld.val(),
+            dateOfBirth: $dobFld.val(),
+            role: $roleFld.val()
+        }, resetFields()).then(findAllUsers)
     }
 
     /**
      * Resets the fields to default
      */
     function resetFields() {
-        $idFld.val('')
         $usernameFld.val('')
         $firstNameFld.val('')
         $lastNameFld.val('')
@@ -78,7 +67,7 @@
      * the users and passes response to renderUsers.
      */
     function findAllUsers() { 
-        userService.findAllUsers(renderUsers)
+        userService.findAllUsers().then(renderUsers)
     }
 
     /**
@@ -92,11 +81,12 @@
      * Handles delete user event when user clicks the cross icon. Reads the user is from the icon id attribute. Uses
      * user service deleteUser() to send a delete request to the server. Updates user list on server response.
      */
-    function deleteUser(eventData) { 
-        userService.deleteUser(eventData.data[0],
-            setTimeout(function(){ 
-                findAllUsers(renderUsers);
-            }, 100))
+    function deleteUser() { 
+        var deleteBtn = $(event.currentTarget);
+        var userId = deleteBtn
+            .parent().parent().parent().attr('id');
+
+        userService.deleteUser(userId).then(findAllUsers)
     }
 
     /**
@@ -130,11 +120,18 @@
      * @param {*} users 
      */
     function renderUsers(users) {
+
         $tbody.empty()
+        
         for(var u in users) {
             var user = users[u]
             var $row = $userRowTemplate.clone()
-            $row.find('.wbdv-id').html(user.id)
+
+            $row.attr('id', user.id)
+
+            $row.find('.wbdv-remove').click(deleteUser)
+            $row.find('.wbdv-edit').click(deleteUser)
+
             $row.find('.wbdv-username').html(user.username)
             $row.find('.wbdv-password').html('********')
             $row.find('.wbdv-first-name').html(user.firstName)
@@ -143,8 +140,7 @@
             $row.find('.wbdv-phone').html(user.phone)
             $row.find('.wbdv-dob').html(user.dateOfBirth)
             $row.find('.wbdv-role').html(user.role)
-            $row.find('.wbdv-remove').click([user.id], deleteUser)
-            // $row.find('.wbdv-edit').click(select)
+
             $tbody.append($row)
         }
     }

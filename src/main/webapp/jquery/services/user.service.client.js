@@ -15,7 +15,7 @@ function AdminUserServiceClient() {
                 'Content-Type': 'application/json'
             },
             success: callback
-        });
+        })
     }
 
     function findAllUsers(callback) {
