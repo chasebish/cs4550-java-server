@@ -40,9 +40,7 @@
             password: $passwordFld.val(),
         }
 
-        userService.register(userObj).then(function(response) {
-            console.log(response)
-        })
+        userService.register(userObj).then(function() { window.location.href = '../profile/profile.template.client.html' })
     }
 
 })();
