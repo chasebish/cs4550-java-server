@@ -55,12 +55,14 @@ function UserService() {
     this.register = register
     this.validUsername = validUsername
     this.login = login
+    this.logout = logout
+    this.profile = profile
     
     this.url = 'http://localhost:8080/api/user'
     
     function register(user) {
         return fetch(this.url + '/register', {
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify(user),
             headers: {
                 "Content-Type": "application/json"
@@ -71,7 +73,7 @@ function UserService() {
 
     function validUsername(username) {
         return fetch(this.url + '/username', {
-            method: 'post',
+            method: 'POST',
             body: username
         }).then(function(response) {
             return response.json()
@@ -80,12 +82,28 @@ function UserService() {
 
     function login(user) {
         return fetch(this.url + '/login', {
-            method: "POST",
+            method: 'POST',
             body: JSON.stringify(user),
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
             }
+        }).then(function(response) {
+            return response.json()
+        })
+    }
+
+    function logout() {
+        return fetch(this.url + '/logout'), {
+            method: 'POST',
+            credentials: 'include'
+        }
+    }
+
+    function profile() {
+        return fetch(this.url + '/profile', {
+            method: 'GET',
+            credentials: 'include'
         }).then(function(response) {
             return response.json()
         })
