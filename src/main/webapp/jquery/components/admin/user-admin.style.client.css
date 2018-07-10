@@ -4,10 +4,6 @@ html {
     padding: 30px;
 }
 
-body {
-    /* background-color: rgb(240, 245, 255); */
-}
-
 #adminBtns {
     display: flex;
     justify-content: space-around;

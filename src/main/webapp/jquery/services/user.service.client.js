@@ -56,23 +56,21 @@ function UserService() {
     this.validUsername = validUsername
     this.login = login
     
-    this.url = '//localhost:8080/api/user'
+    this.url = 'http://localhost:8080/api/user'
     
     function register(user) {
-        return fetch('/register', {
+        return fetch(this.url + '/register', {
             method: 'post',
             body: JSON.stringify(user),
             headers: {
                 "Content-Type": "application/json"
             },
             credentials: 'include'
-        }).then(function(response) {
-            return response.json()
         })
     }
 
     function validUsername(username) {
-        return fetch('/username', {
+        return fetch(this.url + '/username', {
             method: 'post',
             body: username
         }).then(function(response) {
@@ -81,14 +79,13 @@ function UserService() {
     }
 
     function login(user) {
-        console.log(user)
-        return fetch('/login', {
-            method: 'post',
+        return fetch(this.url + '/login', {
+            method: "POST",
             body: JSON.stringify(user),
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
-            },
-            credentials: 'include'
+            }
         }).then(function(response) {
             return response.json()
         })

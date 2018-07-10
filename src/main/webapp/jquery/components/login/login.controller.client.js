@@ -13,6 +13,7 @@
         $loginBtn.click(login)
 
     }
+
     function login() {
 
         var userObj = {
@@ -22,11 +23,10 @@
 
         userService.login(userObj)
             .then(function(out) {
-                console.log(out)
-                // window.location.href = '../profile/profile.template.client.html'
+                window.location.href = '../profile/profile.template.client.html'
             }, function() {
                 alert("Username and password combination does not exist.")
             })
-
     }
+
 })();

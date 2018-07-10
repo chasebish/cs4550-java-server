@@ -1,6 +1,7 @@
 package com.example.assignment_1_chase_bishop.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,14 +41,15 @@ public class UserService {
 	
 	@PostMapping("/api/user/login")
 	public User login(@RequestBody User user, HttpSession session) {
-		User currentUser = userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
-		session.setAttribute("currentUser", currentUser);
-		return currentUser;
+		user = userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
+		session.setAttribute("currentUser", user);
+		return user;
 	}
 	
 	@GetMapping("/api/user/checkLogin")
-	public User checkLogin(HttpSession session) {
-		return (User) session.getAttribute("currentUser");
+	public Optional<User> checkLogin(HttpSession session) {
+		User currentUser = (User) session.getAttribute("currentUser");
+		return userRepository.findById(currentUser.getId());
 	}
 	
 	@PostMapping("/api/user/username")
