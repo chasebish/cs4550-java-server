@@ -57,6 +57,7 @@ function UserService() {
     this.login = login
     this.logout = logout
     this.profile = profile
+    this.updateUser = updateUser
     
     this.url = 'http://localhost:8080/api/user'
     
@@ -106,6 +107,16 @@ function UserService() {
             credentials: 'include'
         }).then(function(response) {
             return response.json()
+        })
+    }
+
+    function updateUser(userId, user) {
+        return fetch(this.url + '/' + userId, {
+            method: 'PUT',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
     }
   }

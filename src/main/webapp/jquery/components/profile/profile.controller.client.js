@@ -2,6 +2,10 @@
 
     $(main)
 
+    var currentUser, currentUserId
+    
+    var $editSuccess
+
     var $usernameFld
     var $phoneFld, $emailFld
     var $roleFld
@@ -12,6 +16,9 @@
     var userService = new UserService()
 
     function main() {
+
+        $editSuccess = $('#editSuccess')
+
         $usernameFld = $('#usernameFld')
         $phoneFld = $('#phoneFld'), $emailFld = $('#emailFld')
         $roleFld = $('#roleFld')
@@ -21,21 +28,39 @@
         $logoutBtn = $('#logoutBtn')
         $logoutBtn.click(logoutUser)
 
+        $editSuccess.hide()
+
         getProfile()
     }
 
     function getProfile() {
         userService.profile().then(function(user) {
-            $usernameFld.val(user.username)
-            $phoneFld.val(user.phone)
-            $emailFld.val(user.email)
-            $roleFld.val(user.role)
-            $dobFld.val(user.dateOfBirth)
+            if (user.id) {
+                currentUser = user
+                currentUserId = user.id
+
+                $usernameFld.val(user.username)
+                $phoneFld.val(user.phone)
+                $emailFld.val(user.email)
+                $roleFld.val(user.role)
+                $dobFld.val(user.dateOfBirth)
+            } else {
+                alert('You aren\'t logged in')
+                window.location.href = '../login/login.template.client.html'
+            }
         })
     }
 
     function updateUser() {
-
+        userService.updateUser(currentUserId, {
+            phone: $phoneFld.val(),
+            email: $emailFld.val(),
+            role: $roleFld.val(),
+            dateOfBirth: $dobFld.val()
+        }).then(function() {
+            getProfile()
+            $editSuccess.show()
+        })
     }
 
     function logoutUser() {

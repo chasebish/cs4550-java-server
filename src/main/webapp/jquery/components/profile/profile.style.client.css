@@ -2,7 +2,7 @@ html {
     padding: 50px;
 }
 
-.container {
+#profileContainer {
     background-color: rgb(210, 231, 255, .25);
     border-radius: 10px;
     padding: 20px;
