@@ -1,5 +1,15 @@
+
+html {
+    background-color: rgb(240, 245, 255);
+}
+
 body {
-    margin: 30px;
+    padding: 30px;
+    background-color: rgb(240, 245, 255);
+}
+
+h1 {
+
 }
 
 #adminBtns {

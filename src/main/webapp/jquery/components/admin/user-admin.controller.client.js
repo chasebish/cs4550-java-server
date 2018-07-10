@@ -88,7 +88,11 @@
      * Reads the user is from the icon id attribute. Uses user service findUserById() to retrieve user and then
      * updates the form on server response.
      */
-    function findUserById() {  }
+    function findUserById(id) { 
+        return userService.findUserById(id).then(function(user) {
+            return user
+        })
+     }
 
     /**
      * Handles delete user event when user clicks the cross icon. Reads the user is from the icon id attribute. Uses
@@ -101,20 +105,23 @@
         userService.deleteUser(userId).then(findAllUsers)
     }
 
+    /**
+     * Selects a current user and updates the input form with properties
+     */
     function selectUser() {
 
         $usernameFld.prop('disabled', true)
 
         $updateBtn.show()
         $createBtn.hide()
-        var updateBtn = $(event.currentTarget)
+        var selectBtn = $(event.currentTarget)
 
-        var user = updateBtn.parent().parent().parent()
+        var selectedUser = selectBtn.parent().parent().parent()
 
-        var userId = user.attr('id')
+        var userId = selectedUser.attr('id')
         currentUserId = userId
 
-        userService.findUserById(userId).then(function(user) {
+        findUserById(userId).then(function(user) {
             $usernameFld.val(user.username)
             $firstNameFld.val(user.firstName)
             $lastNameFld.val(user.lastName)
@@ -123,6 +130,7 @@
             $dobFld.val(user.dateOfBirth)
             $roleFld.val(user.role)
         })
+
     }
 
     /**
@@ -148,12 +156,6 @@
     }
 
     /**
-     * Accepts a user object as parameter and updates the form with the user properties
-     * @param {*} user 
-     */
-    function renderUser(user) {  }
-
-    /**
      * Accepts an array of user instances, clears the current content of the table body, iterates over the array of users,
      * clones a table row template for each user instance, populates the table row with the user object properties, adds
      * the table row to the table body.
@@ -173,7 +175,7 @@
             $row.find('.wbdv-select').click(selectUser)
 
             $row.find('.wbdv-username').html(user.username)
-            $row.find('.wbdv-password').html('********')
+            $row.find('.wbdv-password').html('*************')
             $row.find('.wbdv-first-name').html(user.firstName)
             $row.find('.wbdv-last-name').html(user.lastName)
             $row.find('.wbdv-email').html(user.email)

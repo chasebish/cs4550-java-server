@@ -22,6 +22,13 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
+	/**
+	 * Registers a user and saves their session
+	 * 
+	 * @param user - the User being registered
+	 * @param session - the HttpSession to be saved so that the user stays logged in
+	 * @return - the new User that has been created
+	 */
 	@PostMapping("/register")
 	public User register(@RequestBody User user, HttpSession session) {
 		User currentUser = userRepository.save(user);
@@ -29,16 +36,32 @@ public class UserService {
 		return currentUser;
 	}
 
+	/**
+	 * Finds all current users
+	 * @return - the list of all users
+	 */
 	@GetMapping("/api/user")
 	public Iterable<User> findAllUsers() {
 		return userRepository.findAll();
 	}
 
+	/**
+	 * Creates a new user
+	 * 
+	 * @param user - the new User object
+	 * @return - the User that has been created
+	 */
 	@PostMapping("/api/user")
 	public User createUser(@RequestBody User user) {
 		return userRepository.save(user);
 	}
 	
+	/**
+	 * Finds a user by their unique ID
+	 * 
+	 * @param id - the unique ID matching to a user
+	 * @return - the User that matches with the ID.  If no match, returns null
+	 */
 	@GetMapping("/api/user/{userId}")
 	public User findUserById(@PathVariable("userId") String id) {
 		
@@ -47,6 +70,13 @@ public class UserService {
 		return userRepository.findById(intId).orElse(null);
 	}
 	
+	/**
+	 * Updates a user with new fields
+	 * 
+	 * @param id - the unique ID matching to a user
+	 * @param newUser - the new User object to update a current User
+	 * @return - the User that has been updated.  If no match, returns null
+	 */
 	@PutMapping("/api/user/{userId}")
 	public User updateUser(@PathVariable("userId") int id, @RequestBody User newUser) {
 		User user = userRepository.findById(id).orElse(null);
@@ -54,6 +84,11 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
+	/**
+	 * Deletes a user
+	 * 
+	 * @param id - the unique ID matching to a user
+	 */
 	@DeleteMapping("/api/user/{userId}")
 	public void deleteUser(@PathVariable("userId") int id) {
 		userRepository.deleteById(id);
