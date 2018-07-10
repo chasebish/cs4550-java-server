@@ -7,11 +7,15 @@ function AdminUserServiceClient() {
     this.url = 'http://localhost:8080/api/user';
     var self = this;
 
-    function createUser(user) {
+    function createUser(user, callback) {
         return fetch(self.url, {
             method: 'POST',
-            body: JSON.stringify(user)
-        });
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            success: callback
+        })
     }
 
     function findAllUsers(callback) {
@@ -22,22 +26,27 @@ function AdminUserServiceClient() {
     }
 
     function findUserById(userId) {
-        return fetch(
-            self.url + '/' + userId);
+        return fetch('/api/user/' + userId)
+            .then(function(response) {
+                return response.json();
+            })
     }
 
     function updateUser(userId, user) {
         return fetch(self.url + '/' + userId, {
             method: 'PUT',
-            body: JSON.stringify(user)
-        });
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
     }
 
     function deleteUser(userId, callback) {
-        return fetch(
-            self.url + '/' + userId,
-            { method: 'DELETE' }
-        );
+        return fetch(self.url + '/' + userId,{
+            method: 'DELETE',
+            success: callback
+        })
     }
      
 }
