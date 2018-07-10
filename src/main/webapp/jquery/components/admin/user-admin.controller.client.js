@@ -1,7 +1,10 @@
 (function () {
     $(main)
+
+    var currentUserId
+
     var $usernameFld, $passwordFld
-    var $updateBtn, $createBtn, $searchBtn
+    var $updateBtn, $createBtn, $clearBtn
     var $firstNameFld, $lastNameFld
     var $emailFld, $phoneFld, $dobFld
     var $roleFld
@@ -26,6 +29,10 @@
         $createBtn.click(createUser)
         $updateBtn = $('.wbdv-update')
         $updateBtn.click(updateUser)
+        $clearBtn = $('.wbdv-clear')
+        $clearBtn.click(resetFields)
+
+        $updateBtn.hide()
 
         // Renders all current users
         findAllUsers()
@@ -53,6 +60,12 @@
      * Resets the fields to default
      */
     function resetFields() {
+
+        currentUserId = null
+        $usernameFld.prop('disabled', false)
+        $updateBtn.hide()
+        $createBtn.show()
+
         $usernameFld.val('')
         $firstNameFld.val('')
         $lastNameFld.val('')
@@ -82,11 +95,34 @@
      * user service deleteUser() to send a delete request to the server. Updates user list on server response.
      */
     function deleteUser() { 
-        var deleteBtn = $(event.currentTarget);
-        var userId = deleteBtn
-            .parent().parent().parent().attr('id');
+        var deleteBtn = $(event.currentTarget)
+        var userId = deleteBtn.parent().parent().parent().attr('id')
 
         userService.deleteUser(userId).then(findAllUsers)
+    }
+
+    function selectUser() {
+
+        $usernameFld.prop('disabled', true)
+
+        $updateBtn.show()
+        $createBtn.hide()
+        var updateBtn = $(event.currentTarget)
+
+        var user = updateBtn.parent().parent().parent()
+
+        var userId = user.attr('id')
+        currentUserId = userId
+
+        userService.findUserById(userId).then(function(user) {
+            $usernameFld.val(user.username)
+            $firstNameFld.val(user.firstName)
+            $lastNameFld.val(user.lastName)
+            $emailFld.val(user.email)
+            $phoneFld.val(user.phone)
+            $dobFld.val(user.dateOfBirth)
+            $roleFld.val(user.role)
+        })
     }
 
     /**
@@ -94,9 +130,9 @@
      * Reads new user values form the form, creates a user object and then uses user service updateUser() to send
      * the new user data to server. Updates user list on server response
      */
-    function updateUser() { 
-        userService.updateUser(id, {
-            username: $usernameFld.val(),
+    function updateUser() {
+
+        userService.updateUser(currentUserId, {
             password: $passwordFld.val(),
             firstName: $firstNameFld.val(),
             lastName: $lastNameFld.val(),
@@ -104,7 +140,11 @@
             phone: $phoneFld.val(),
             dateOfBirth: $dobFld.val(),
             role: $roleFld.val()
-        }) 
+        }).then(function() {
+            resetFields()
+            findAllUsers()
+        })
+
     }
 
     /**
@@ -130,7 +170,7 @@
             $row.attr('id', user.id)
 
             $row.find('.wbdv-remove').click(deleteUser)
-            $row.find('.wbdv-edit').click(deleteUser)
+            $row.find('.wbdv-select').click(selectUser)
 
             $row.find('.wbdv-username').html(user.username)
             $row.find('.wbdv-password').html('********')

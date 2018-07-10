@@ -26,8 +26,10 @@ function AdminUserServiceClient() {
     }
 
     function findUserById(userId) {
-        return fetch(
-            self.url + '/' + userId);
+        return fetch('/api/user/' + userId)
+            .then(function(response) {
+                return response.json();
+            })
     }
 
     function updateUser(userId, user) {
@@ -37,14 +39,14 @@ function AdminUserServiceClient() {
             headers: {
                 'Content-Type': 'application/json'
             }
-        });
+        })
     }
 
     function deleteUser(userId, callback) {
         return fetch(self.url + '/' + userId,{
             method: 'DELETE',
             success: callback
-        });
+        })
     }
      
 }

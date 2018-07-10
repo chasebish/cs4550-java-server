@@ -52,17 +52,19 @@
                     </td>
                     <td>
                         <select id="roleFld" class="form-control">
+                            <option disabled selected value>Select a Role</option>
                             <option value="FACULTY">Faculty</option>
                             <option value="STUDENT">Student</option>
                             <option value="ADMIN">Admin</option>
                         </select>
                     </td>
                     <td>
-                        <span class="float-right" style="white-space: nowrap">
-                            <button class="fa-2x fa fa-search wbdv-search"></button>
-                            <button class="fa-2x fa fa-plus wbdv-create"></button>
-                            <button class="fa-2x fa fa-check wbdv-update"></button>
-                        </span>
+                        <div id="adminBtns" class="float-right" style="white-space: nowrap">
+                            <button type="button" class="btn btn-success wbdv-create">Create User</button>
+                            <button type="button" class="btn btn-primary wbdv-update">Update User</button>
+
+                            <button type="button" class="btn btn-secondary wbdv-clear">Clear</button>
+                        </div>
                     </td>
                 </tr>
                 <tbody class="wbdv-tbody">
@@ -76,9 +78,9 @@
                         <td class="wbdv-dob"></td>
                         <td class="wbdv-role"></td>
                         <td class="wbdv-actions">
-                            <span class="float-right">
-                                <button id="wbdv-remove" class="fa-2x fa fa-times wbdv-remove"></button>
-                                <button id="wbdv-edit" class="fa-2x fa fa-pencil wbdv-edit"></button>
+                            <span id="adminBtns" class="float-right">
+                                <button type="button" class="btn btn-danger wbdv-remove">Delete</button>
+                                <button type="button" class="btn btn-secondary wbdv-select">Select</button>
                             </span>
                         </td>
                     </tr>

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.assignment_1_chase_bishop.models.User;
 import com.example.assignment_1_chase_bishop.repositories.UserRepository;
 
+
+// Service for homework
 @RestController
 public class UserService {
 
@@ -32,17 +34,20 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	@GetMapping("/api/user/{userId}")
-	public User findUserById(@PathVariable("userId") int id) {
-		return userRepository.findById(id).orElse(null);
-	}
-	
 	@PostMapping("/api/user")
 	public User createUser(@RequestBody User user) {
 		return userRepository.save(user);
 	}
-
-	@PutMapping("/api/user")
+	
+	@GetMapping("/api/user/{userId}")
+	public User findUserById(@PathVariable("userId") String id) {
+		
+		int intId = Integer.parseInt(id);
+		
+		return userRepository.findById(intId).orElse(null);
+	}
+	
+	@PutMapping("/api/user/{userId}")
 	public User updateUser(@PathVariable("userId") int id, @RequestBody User newUser) {
 		User user = userRepository.findById(id).orElse(null);
 		user.setUser(newUser);
