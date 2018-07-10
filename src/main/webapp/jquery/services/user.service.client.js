@@ -26,7 +26,7 @@ function AdminUserServiceClient() {
     }
 
     function findUserById(userId) {
-        return fetch('/api/user/' + userId)
+        return fetch(self.url + '/' + userId)
             .then(function(response) {
                 return response.json();
             })
@@ -52,8 +52,29 @@ function AdminUserServiceClient() {
 }
 
 function UserService() {
-    this.register = register;
+    this.register = register
+    this.validUsername = validUsername
     
-    function register() {  }
+    this.url = 'http://localhost:8080/api/user'
+    
+    function register(user) {
+        return fetch('/register', {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: 'include'
+        })
+    }
+
+    function validUsername(username) {
+        return fetch('/username', {
+            method: 'post',
+            body: username
+        }).then(function(response) {
+            return response.json()
+        })
+    }
   }
   

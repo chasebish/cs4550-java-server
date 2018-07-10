@@ -1,5 +1,7 @@
 package com.example.assignment_1_chase_bishop.services;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,11 @@ public class UserService {
 		session.setAttribute("currentUser", currentUser);
 		return currentUser;
 	}
+	
+	@PostMapping("/username")
+	public Boolean validUsername(@RequestBody String username) {
+		return userRepository.findUserByUsername(username) == null;
+	}
 
 	/**
 	 * Finds all current users
@@ -42,7 +49,7 @@ public class UserService {
 	 */
 	@GetMapping("/api/user")
 	public Iterable<User> findAllUsers() {
-		return userRepository.findAll();
+		return (List<User>) userRepository.findAll();
 	}
 
 	/**
