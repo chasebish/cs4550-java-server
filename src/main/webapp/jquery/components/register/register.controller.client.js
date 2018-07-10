@@ -12,17 +12,14 @@
     }
 
     function createAccount() {
-        samePassword()
-    }
-
-    function register() { 
-
-        var userObj = {
-            username: $usernameFld.val(),
-            password: $passwordFld.val(),
+        if ($usernameFld.val() === '' || $passwordFld.val() === '' || $confirmPasswordFld.val() === '') {
+            alert('Fields cannot be empty.')
         }
-
-        userService.register(userObj).then(console.log('hello there'))
+        else if ($passwordFld.val() !== $confirmPasswordFld.val()) {
+            alert('Passwords must be the same.')
+        } else {
+            validUsername()
+        }
     }
 
     function validUsername() {
@@ -36,14 +33,14 @@
         })
     }
 
-    function samePassword() {
+    function register() { 
 
-        if ($passwordFld.val() !== $confirmPasswordFld.val()) {
-            alert('Passwords must be the same.')
-        } else {
-            validUsername()
+        var userObj = {
+            username: $usernameFld.val(),
+            password: $passwordFld.val(),
         }
-    }
 
+        userService.register(userObj).then(console.log('hello there'))
+    }
 
 })();

@@ -38,6 +38,11 @@ public class UserService {
 		return currentUser;
 	}
 	
+	@PostMapping("/login")
+	public User login(@RequestBody User user) {
+		return userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
+	}
+	
 	@PostMapping("/username")
 	public Boolean validUsername(@RequestBody String username) {
 		return userRepository.findUserByUsername(username) == null;
