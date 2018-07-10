@@ -1,6 +1,6 @@
-(function () {
+(function() {
 
-   $(main)
+    $(main)
 
     var $usernameFld, $passwordFld
     var $loginBtn
@@ -20,9 +20,12 @@
             password: $passwordFld.val()
         }
 
-        userService.login(userObj).then(function(out) {
-            console.log(out)
-        })
+        userService.login(userObj)
+            .then(function() {
+                window.location.href = '../profile/profile.template.client.html'
+            }, function() {
+                alert("Username and password combination does not exist.")
+            })
 
     }
 })();
