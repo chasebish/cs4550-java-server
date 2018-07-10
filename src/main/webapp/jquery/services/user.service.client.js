@@ -4,7 +4,7 @@ function AdminUserServiceClient() {
     this.findUserById = findUserById;
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
-    this.url = 'http://localhost:8080/api/user';
+    this.url = '/api/user';
     var self = this;
 
     function createUser(user, callback) {
@@ -59,7 +59,7 @@ function UserService() {
     this.updateUser = updateUser
     this.logout = logout
     
-    this.url = 'http://localhost:8080/api/user'
+    this.url = '/api/user'
     
     function register(user) {
         return fetch(this.url + '/register', {
