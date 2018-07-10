@@ -56,7 +56,7 @@ function UserService() {
     this.validUsername = validUsername
     this.login = login
     
-    this.url = 'http://localhost:8080/api/user'
+    this.url = '//localhost:8080/api/user'
     
     function register(user) {
         return fetch('/register', {
@@ -81,6 +81,7 @@ function UserService() {
     }
 
     function login(user) {
+        console.log(user)
         return fetch('/login', {
             method: 'post',
             body: JSON.stringify(user),

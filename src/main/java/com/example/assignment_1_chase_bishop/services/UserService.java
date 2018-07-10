@@ -31,26 +31,26 @@ public class UserService {
 	 * @param session - the HttpSession to be saved so that the user stays logged in
 	 * @return - the new User that has been created
 	 */
-	@PostMapping("/register")
+	@PostMapping("/api/user/register")
 	public User register(@RequestBody User user, HttpSession session) {
 		User currentUser = userRepository.save(user);
 		session.setAttribute("currentUser", currentUser);
 		return currentUser;
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/api/user/login")
 	public User login(@RequestBody User user, HttpSession session) {
 		User currentUser = userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
 		session.setAttribute("currentUser", currentUser);
 		return currentUser;
 	}
 	
-	@GetMapping("/checkLogin")
+	@GetMapping("/api/user/checkLogin")
 	public User checkLogin(HttpSession session) {
 		return (User) session.getAttribute("currentUser");
 	}
 	
-	@PostMapping("/username")
+	@PostMapping("/api/user/username")
 	public Boolean validUsername(@RequestBody String username) {
 		return userRepository.findUserByUsername(username) == null;
 	}

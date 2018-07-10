@@ -21,8 +21,9 @@
         }
 
         userService.login(userObj)
-            .then(function() {
-                window.location.href = '../profile/profile.template.client.html'
+            .then(function(out) {
+                console.log(out)
+                // window.location.href = '../profile/profile.template.client.html'
             }, function() {
                 alert("Username and password combination does not exist.")
             })
