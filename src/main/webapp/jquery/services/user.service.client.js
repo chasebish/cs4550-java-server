@@ -54,6 +54,7 @@ function AdminUserServiceClient() {
 function UserService() {
     this.register = register
     this.validUsername = validUsername
+    this.login = login
     
     this.url = 'http://localhost:8080/api/user'
     
@@ -65,6 +66,8 @@ function UserService() {
                 "Content-Type": "application/json"
             },
             credentials: 'include'
+        }).then(function(response) {
+            return response.json()
         })
     }
 
@@ -72,6 +75,19 @@ function UserService() {
         return fetch('/username', {
             method: 'post',
             body: username
+        }).then(function(response) {
+            return response.json()
+        })
+    }
+
+    function login(user) {
+        return fetch('/login', {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: 'include'
         }).then(function(response) {
             return response.json()
         })

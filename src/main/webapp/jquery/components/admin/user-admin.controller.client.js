@@ -67,6 +67,7 @@
         $createBtn.show()
 
         $usernameFld.val('')
+        $passwordFld.val('')
         $firstNameFld.val('')
         $lastNameFld.val('')
         $emailFld.val('')
@@ -123,6 +124,7 @@
 
         findUserById(userId).then(function(user) {
             $usernameFld.val(user.username)
+            $passwordFld.val(user.password)
             $firstNameFld.val(user.firstName)
             $lastNameFld.val(user.lastName)
             $emailFld.val(user.email)
