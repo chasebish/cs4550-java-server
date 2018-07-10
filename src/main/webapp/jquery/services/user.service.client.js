@@ -66,6 +66,8 @@ function UserService() {
                 "Content-Type": "application/json"
             },
             credentials: 'include'
+        }).then(function(response) {
+            return response.json()
         })
     }
 
@@ -87,7 +89,7 @@ function UserService() {
             },
             credentials: 'include'
         }).then(function(response) {
-            return response
+            return response.json()
         })
     }
   }

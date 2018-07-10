@@ -40,7 +40,9 @@
             password: $passwordFld.val(),
         }
 
-        userService.register(userObj).then(console.log('hello there'))
+        userService.register(userObj).then(function(response) {
+            console.log(response)
+        })
     }
 
 })();
