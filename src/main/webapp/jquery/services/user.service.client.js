@@ -55,9 +55,9 @@ function UserService() {
     this.register = register
     this.validUsername = validUsername
     this.login = login
-    this.logout = logout
     this.profile = profile
     this.updateUser = updateUser
+    this.logout = logout
     
     this.url = 'http://localhost:8080/api/user'
     
@@ -95,10 +95,10 @@ function UserService() {
     }
 
     function logout() {
-        return fetch(this.url + '/logout'), {
+        return fetch(this.url + '/logout', {
             method: 'POST',
             credentials: 'include'
-        }
+        })
     }
 
     function profile() {

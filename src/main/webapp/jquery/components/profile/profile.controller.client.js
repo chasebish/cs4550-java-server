@@ -69,6 +69,7 @@
         }).catch(function() {
             alert('There was an error logging you out.')
         })
+        // var logout = userService.logout()
     }
 
 })()
