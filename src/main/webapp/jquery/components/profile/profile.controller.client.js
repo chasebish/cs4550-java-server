@@ -80,10 +80,10 @@
             null,
             $firstNameFld.val(),
             $lastNameFld.val(),
-            $phoneFld.val(),
             $emailFld.val(),
-            $roleFld.val(),
-            $dobFld.val()
+            $phoneFld.val(),
+            $dobFld.val(),
+            $roleFld.val()
         )
 
         userService.updateProfile(user).then(function() {
