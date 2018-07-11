@@ -44,9 +44,9 @@
 
     function getProfile() {
         userService.profile().then(function(user) {
-            if (user.id) {
-                currentUserId = user.id
-
+            if (user === null) {
+                $noLogin.modal('show')
+            } else if (user.id) {
                 $usernameFld.val(user.username)
                 $firstNameFld.val(user.firstName)
                 $lastNameFld.val(user.lastName)
