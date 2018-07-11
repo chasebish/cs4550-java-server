@@ -9,6 +9,7 @@
     var $noLogin
 
     var $usernameFld
+    var $firstNameFld, $lastNameFld
     var $phoneFld, $emailFld
     var $roleFld
     var $dobFld
@@ -27,6 +28,7 @@
         $noLogin = $('#noLogin')
 
         $usernameFld = $('#usernameFld')
+        $firstNameFld = $('#firstNameFld'), $lastNameFld = $('#lastNameFld')
         $phoneFld = $('#phoneFld'), $emailFld = $('#emailFld')
         $roleFld = $('#roleFld')
         $dobFld = $('#dobFld')
@@ -46,6 +48,8 @@
                 currentUserId = user.id
 
                 $usernameFld.val(user.username)
+                $firstNameFld.val(user.firstName)
+                $lastNameFld.val(user.lastName)
                 $phoneFld.val(user.phone)
                 $emailFld.val(user.email)
                 $roleFld.val(user.role)
@@ -58,6 +62,8 @@
 
     function updateProfile() {
         userService.updateProfile({
+            firstName: $firstNameFld.val(),
+            lastName: $lastNameFld.val(),
             phone: $phoneFld.val(),
             email: $emailFld.val(),
             role: $roleFld.val(),
