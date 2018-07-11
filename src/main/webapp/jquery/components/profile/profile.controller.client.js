@@ -74,14 +74,19 @@
      * Updates a user's profile based on new attributes passed in
      */
     function updateProfile() {
-        userService.updateProfile({
-            firstName: $firstNameFld.val(),
-            lastName: $lastNameFld.val(),
-            phone: $phoneFld.val(),
-            email: $emailFld.val(),
-            role: $roleFld.val(),
-            dateOfBirth: $dobFld.val()
-        }).then(function() {
+
+        var user = new User(
+            null,
+            null,
+            $firstNameFld.val(),
+            $lastNameFld.val(),
+            $phoneFld.val(),
+            $emailFld.val(),
+            $roleFld.val(),
+            $dobFld.val()
+        )
+
+        userService.updateProfile(user).then(function() {
             getProfile()
             $editSuccess.show()
             hideAlert($editSuccess)

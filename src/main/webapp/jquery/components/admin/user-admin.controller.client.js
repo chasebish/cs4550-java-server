@@ -63,16 +63,18 @@
                     $usernameTaken.modal('show')
                 } else {
 
-                    userService.createUser({
-                        username: $usernameFld.val(),
-                        password: $passwordFld.val(),
-                        firstName: $firstNameFld.val(),
-                        lastName: $lastNameFld.val(),
-                        email: $emailFld.val(),
-                        phone: $phoneFld.val(),
-                        dateOfBirth: $dobFld.val(),
-                        role: $roleFld.val()
-                    }, resetFields()).then(function() {
+                    var user = new User(
+                        $usernameFld.val(),
+                        $passwordFld.val(),
+                        $firstNameFld.val(),
+                        $lastNameFld.val(),
+                        $emailFld.val(),
+                        $phoneFld.val(),
+                        $dobFld.val(),
+                        $roleFld.val()
+                    )
+
+                    userService.createUser(user, resetFields()).then(function() {
                         findAllUsers()
                         $createSuccess.show()
                         $deleteSuccess.hide()
@@ -179,15 +181,18 @@
      */
     function updateUser() {
 
-        userService.updateUser(currentUserId, {
-            password: $passwordFld.val(),
-            firstName: $firstNameFld.val(),
-            lastName: $lastNameFld.val(),
-            email: $emailFld.val(),
-            phone: $phoneFld.val(),
-            dateOfBirth: $dobFld.val(),
-            role: $roleFld.val()
-        }).then(function() {
+        var user = new User(
+            $usernameFld.val(),
+            $passwordFld.val(),
+            $firstNameFld.val(),
+            $lastNameFld.val(),
+            $emailFld.val(),
+            $phoneFld.val(),
+            $dobFld.val(),
+            $roleFld.val()
+        )
+
+        userService.updateUser(currentUserId, user).then(function() {
             resetFields()
             findAllUsers()
             $updateSuccess.show()

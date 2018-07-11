@@ -54,12 +54,9 @@
      */
     function register() { 
 
-        var userObj = {
-            username: $usernameFld.val(),
-            password: $passwordFld.val(),
-        }
+        var user = new User($usernameFld.val(), $passwordFld.val(), null, null, null, null, null, null)
 
-        userService.register(userObj).then(function() { window.location.href = '../profile/profile.template.client.html' })
+        userService.register(user).then(function() { window.location.href = '../profile/profile.template.client.html' })
     }
 
 })();
