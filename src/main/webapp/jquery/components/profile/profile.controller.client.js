@@ -2,9 +2,11 @@
 
     $(main)
 
-    var currentUser, currentUserId
+    var currentUserId
     
-    var $editSuccess
+    var $editSuccess, $dismissNoLogin
+
+    var $noLogin
 
     var $usernameFld
     var $phoneFld, $emailFld
@@ -17,7 +19,12 @@
 
     function main() {
 
-        $editSuccess = $('#editSuccess')
+        $editSuccess = $('#editSuccess'), $dismissNoLogin = $('#dismissNoLogin')
+        $dismissNoLogin.click(function() {
+            window.location.href = '../login/login.template.client.html'
+        })
+
+        $noLogin = $('#noLogin')
 
         $usernameFld = $('#usernameFld')
         $phoneFld = $('#phoneFld'), $emailFld = $('#emailFld')
@@ -36,7 +43,6 @@
     function getProfile() {
         userService.profile().then(function(user) {
             if (user.id) {
-                currentUser = user
                 currentUserId = user.id
 
                 $usernameFld.val(user.username)
@@ -45,8 +51,7 @@
                 $roleFld.val(user.role)
                 $dobFld.val(user.dateOfBirth)
             } else {
-                alert('You aren\'t logged in')
-                window.location.href = '../login/login.template.client.html'
+                $noLogin.modal('show')
             }
         })
     }
@@ -69,7 +74,6 @@
         }).catch(function() {
             alert('There was an error logging you out.')
         })
-        // var logout = userService.logout()
     }
 
 })()

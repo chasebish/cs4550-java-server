@@ -2,11 +2,15 @@
 
     $(main)
 
+    var $invalidUser
+
     var $usernameFld, $passwordFld
     var $loginBtn
     var userService = new UserService()
 
     function main() {
+
+        $invalidUser = $('#invalidUser')
 
         $usernameFld = $('#usernameFld'), $passwordFld = $('#passwordFld')
         $loginBtn = $('#loginBtn')
@@ -25,7 +29,7 @@
             .then(function(out) {
                 window.location.href = '../profile/profile.template.client.html'
             }, function() {
-                alert("Username and password combination does not exist.")
+                $invalidUser.modal('show')
             })
     }
 

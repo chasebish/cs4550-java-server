@@ -1,11 +1,16 @@
 (function () {
     $(main)
 
+    var $emptyFields, $samePassword, $usernameTaken
+
     var $usernameFld, $passwordFld, $confirmPasswordFld
     var $createBtn
     var userService = new UserService()
 
     function main() {
+
+        $emptyFields = $('#emptyFields'), $samePassword = $('#samePassword'), $usernameTaken = $('#usernameTaken')
+
         $usernameFld = $('#usernameFld'), $passwordFld = $('#passwordFld'), $confirmPasswordFld = $('#confirmPasswordFld')
         $createBtn = $('#createBtn')
         $createBtn.click(createAccount)
@@ -13,10 +18,10 @@
 
     function createAccount() {
         if ($usernameFld.val() === '' || $passwordFld.val() === '' || $confirmPasswordFld.val() === '') {
-            alert('Fields cannot be empty.')
+            $emptyFields.modal('show')
         }
         else if ($passwordFld.val() !== $confirmPasswordFld.val()) {
-            alert('Passwords must be the same.')
+            $samePassword.modal('show')
         } else {
             validUsername()
         }
@@ -26,7 +31,7 @@
 
         userService.validUsername($usernameFld.val()).then(function(isValid) {
             if (!isValid) {
-                alert('Username is already taken.  Please pick a new username.')
+                $usernameTaken.modal('show')
             } else {
                 register()
             }

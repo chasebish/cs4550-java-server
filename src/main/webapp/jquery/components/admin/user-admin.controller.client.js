@@ -3,6 +3,8 @@
 
     var currentUserId
 
+    var $noUsername, $noPassword, $usernameTaken
+
     var $usernameFld, $passwordFld
     var $updateBtn, $createBtn, $clearBtn
     var $firstNameFld, $lastNameFld
@@ -18,6 +20,8 @@
      * Binds action icons, such as create, update, select, and delete, to respective event handlers.
      */
     function main() {
+
+        $noUsername = $('#noUsername'), $noPassword = $('#noPassword'), $usernameTaken = $('#usernameTaken')
 
         $usernameFld = $('#usernameFld'), $passwordFld=$('#passwordFld')
         $firstNameFld = $('#firstNameFld'), $lastNameFld=$('#lastNameFld')
@@ -44,16 +48,31 @@
      * server response.
      */
     function createUser() {
-        userService.createUser({
-            username: $usernameFld.val(),
-            password: $passwordFld.val(),
-            firstName: $firstNameFld.val(),
-            lastName: $lastNameFld.val(),
-            email: $emailFld.val(),
-            phone: $phoneFld.val(),
-            dateOfBirth: $dobFld.val(),
-            role: $roleFld.val()
-        }, resetFields()).then(findAllUsers)
+
+        if ($usernameFld.val() === '') {
+            $noUsername.modal('show')
+        } else if($passwordFld.val() === '') {
+            $noPassword.modal('show')
+        } else {
+            userService.validUsername($usernameFld.val()).then(function(isValid) {
+                if (!isValid) {
+                    $usernameTaken.modal('show')
+                } else {
+
+                    userService.createUser({
+                        username: $usernameFld.val(),
+                        password: $passwordFld.val(),
+                        firstName: $firstNameFld.val(),
+                        lastName: $lastNameFld.val(),
+                        email: $emailFld.val(),
+                        phone: $phoneFld.val(),
+                        dateOfBirth: $dobFld.val(),
+                        role: $roleFld.val()
+                    }, resetFields()).then(findAllUsers)
+
+                }
+            })
+        }
     }
 
     /**

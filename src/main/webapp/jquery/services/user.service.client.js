@@ -1,5 +1,6 @@
 function AdminUserServiceClient() {
     this.createUser = createUser;
+    this.validUsername = validUsername;
     this.findAllUsers = findAllUsers;
     this.findUserById = findUserById;
     this.deleteUser = deleteUser;
@@ -15,6 +16,15 @@ function AdminUserServiceClient() {
                 'Content-Type': 'application/json'
             },
             success: callback
+        })
+    }
+
+    function validUsername(username) {
+        return fetch(this.url + '/username', {
+            method: 'POST',
+            body: username
+        }).then(function(response) {
+            return response.json()
         })
     }
 
