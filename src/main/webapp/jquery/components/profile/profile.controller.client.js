@@ -1,12 +1,10 @@
 (function() {
 
     $(main)
-
-    var currentUserId
     
     var $editSuccess, $dismissNoLogin
 
-    var $noLogin
+    var $xNoLogin, $noLogin
 
     var $usernameFld
     var $firstNameFld, $lastNameFld
@@ -25,7 +23,10 @@
      */
     function main() {
 
-        $editSuccess = $('#editSuccess'), $dismissNoLogin = $('#dismissNoLogin')
+        $editSuccess = $('#editSuccess'), $xNoLogin = $('#xNoLogin'), $dismissNoLogin = $('#dismissNoLogin')
+        $xNoLogin.click(function() {
+            window.location.href = '../login/login.template.client.html'
+        })
         $dismissNoLogin.click(function() {
             window.location.href = '../login/login.template.client.html'
         })
