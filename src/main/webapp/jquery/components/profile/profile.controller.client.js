@@ -84,6 +84,7 @@
         }).then(function() {
             getProfile()
             $editSuccess.show()
+            hideAlert($editSuccess)
         })
     }
 
@@ -96,6 +97,16 @@
         }).catch(function() {
             alert('There was an error logging you out.')
         })
+    }
+
+    /**
+     * Hides an alert after 5 seconds
+     * 
+     * @param {alert} alert 
+     */
+    function hideAlert(alert) {
+        setTimeout(function() {
+            alert.hide()}, 5000)
     }
 
 })()

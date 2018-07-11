@@ -77,6 +77,7 @@
                         $createSuccess.show()
                         $deleteSuccess.hide()
                         $updateSuccess.hide()
+                        hideAlert($createSuccess)
                     })
 
                 }
@@ -138,6 +139,7 @@
             $deleteSuccess.show()
             $updateSuccess.hide()
             $createSuccess.hide()
+            hideAlert($deleteSuccess)
         })
     }
 
@@ -191,6 +193,7 @@
             $updateSuccess.show()
             $deleteSuccess.hide()
             $createSuccess.hide()
+            hideAlert($updateSuccess)
         })
 
     }
@@ -225,5 +228,15 @@
 
             $tbody.append($row)
         }
+    }
+
+    /**
+     * Hides an alert after 5 seconds
+     * 
+     * @param {alert} alert 
+     */
+    function hideAlert(alert) {
+        setTimeout(function() {
+            alert.hide()}, 5000)
     }
 })()
