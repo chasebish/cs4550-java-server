@@ -7,7 +7,13 @@ function User(username, password, firstName, lastName, email, phone, dateOfBirth
     this.lastName = lastName
     this.email = email
     this.phone = phone
-    this.dateOfBirth = dateOfBirth
+    if (dateOfBirth === '') {
+        this.dateOfBirth = null
+        console.log('empty')
+    } else {
+        this.dateOfBirth = dateOfBirth
+        console.log('oops')
+    }
     this.role = role
   
     // Setters and getters
