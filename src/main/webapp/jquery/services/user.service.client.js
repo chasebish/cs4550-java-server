@@ -66,7 +66,7 @@ function UserService() {
     this.validUsername = validUsername
     this.login = login
     this.profile = profile
-    this.updateUser = updateUser
+    this.updateProfile = updateProfile
     this.logout = logout
     
     this.url = '/api/user'
@@ -120,10 +120,11 @@ function UserService() {
         })
     }
 
-    function updateUser(userId, user) {
-        return fetch(this.url + '/' + userId, {
+    function updateProfile(user) {
+        return fetch(this.url + '/profile', {
             method: 'PUT',
             body: JSON.stringify(user),
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             }

@@ -31,7 +31,7 @@
         $roleFld = $('#roleFld')
         $dobFld = $('#dobFld')
         $updateBtn = $('#updateBtn')
-        $updateBtn.click(updateUser)
+        $updateBtn.click(updateProfile)
         $logoutBtn = $('#logoutBtn')
         $logoutBtn.click(logoutUser)
 
@@ -56,8 +56,8 @@
         })
     }
 
-    function updateUser() {
-        userService.updateUser(currentUserId, {
+    function updateProfile() {
+        userService.updateProfile({
             phone: $phoneFld.val(),
             email: $emailFld.val(),
             role: $roleFld.val(),

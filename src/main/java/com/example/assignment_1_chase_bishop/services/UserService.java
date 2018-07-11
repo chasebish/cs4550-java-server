@@ -57,6 +57,14 @@ public class UserService {
 		User currentUser = (User) session.getAttribute("currentUser");
 		return userRepository.findById(currentUser.getId());
 	}
+	
+	@PutMapping("/api/user/profile")
+	public User updateProfile(@RequestBody User newUser, HttpSession session) {
+		User sessionUser = (User) session.getAttribute("currentUser");
+		int sessionUserId = sessionUser.getId();
+		return this.updateUser(sessionUserId, newUser);
+	}
+
 
 	@PostMapping("/api/user/username")
 	public Boolean validUsername(@RequestBody String username) {
