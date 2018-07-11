@@ -1,7 +1,6 @@
 package com.example.assignment_1_chase_bishop.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 

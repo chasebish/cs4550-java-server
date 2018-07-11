@@ -28,12 +28,9 @@
      */
     function login() {
 
-        var userObj = {
-            username: $usernameFld.val(),
-            password: $passwordFld.val()
-        }
+        var user = new User($usernameFld.val(), $passwordFld.val(), null, null, null, null, null, null)
 
-        userService.login(userObj)
+        userService.login(user)
             .then(function(out) {
                 window.location.href = '../profile/profile.template.client.html'
             }, function() {

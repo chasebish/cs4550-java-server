@@ -3,6 +3,7 @@
 
     var currentUserId
 
+    var $updateSuccess, $deleteSuccess, $createSuccess
     var $noUsername, $noPassword, $usernameTaken
 
     var $usernameFld, $passwordFld
@@ -20,6 +21,9 @@
      * Binds action icons, such as create, update, select, and delete, to respective event handlers.
      */
     function main() {
+
+        $updateSuccess = $('#updateSuccess'), $deleteSuccess = $('#deleteSuccess'), $createSuccess = $('#createSuccess')
+        $updateSuccess.hide(), $deleteSuccess.hide(), $createSuccess.hide()
 
         $noUsername = $('#noUsername'), $noPassword = $('#noPassword'), $usernameTaken = $('#usernameTaken')
 
@@ -59,16 +63,24 @@
                     $usernameTaken.modal('show')
                 } else {
 
-                    userService.createUser({
-                        username: $usernameFld.val(),
-                        password: $passwordFld.val(),
-                        firstName: $firstNameFld.val(),
-                        lastName: $lastNameFld.val(),
-                        email: $emailFld.val(),
-                        phone: $phoneFld.val(),
-                        dateOfBirth: $dobFld.val(),
-                        role: $roleFld.val()
-                    }, resetFields()).then(findAllUsers)
+                    var user = new User(
+                        $usernameFld.val(),
+                        $passwordFld.val(),
+                        $firstNameFld.val(),
+                        $lastNameFld.val(),
+                        $emailFld.val(),
+                        $phoneFld.val(),
+                        $dobFld.val(),
+                        $roleFld.val()
+                    )
+
+                    userService.createUser(user, resetFields()).then(function() {
+                        findAllUsers()
+                        $createSuccess.show()
+                        $deleteSuccess.hide()
+                        $updateSuccess.hide()
+                        hideAlert($createSuccess)
+                    })
 
                 }
             })
@@ -126,11 +138,15 @@
             if (userId === currentUserId) {
                 resetFields()
             }
+            $deleteSuccess.show()
+            $updateSuccess.hide()
+            $createSuccess.hide()
+            hideAlert($deleteSuccess)
         })
     }
 
     /**
-     * Selects a current user and updates the input form with properties
+     * Selects a current user and updates the input form with properties.  Can also be called renderUser()
      */
     function selectUser() {
 
@@ -165,17 +181,24 @@
      */
     function updateUser() {
 
-        userService.updateUser(currentUserId, {
-            password: $passwordFld.val(),
-            firstName: $firstNameFld.val(),
-            lastName: $lastNameFld.val(),
-            email: $emailFld.val(),
-            phone: $phoneFld.val(),
-            dateOfBirth: $dobFld.val(),
-            role: $roleFld.val()
-        }).then(function() {
+        var user = new User(
+            $usernameFld.val(),
+            $passwordFld.val(),
+            $firstNameFld.val(),
+            $lastNameFld.val(),
+            $emailFld.val(),
+            $phoneFld.val(),
+            $dobFld.val(),
+            $roleFld.val()
+        )
+
+        userService.updateUser(currentUserId, user).then(function() {
             resetFields()
             findAllUsers()
+            $updateSuccess.show()
+            $deleteSuccess.hide()
+            $createSuccess.hide()
+            hideAlert($updateSuccess)
         })
 
     }
@@ -210,5 +233,15 @@
 
             $tbody.append($row)
         }
+    }
+
+    /**
+     * Hides an alert after 5 seconds
+     * 
+     * @param {alert} alert 
+     */
+    function hideAlert(alert) {
+        setTimeout(function() {
+            alert.hide()}, 5000)
     }
 })()

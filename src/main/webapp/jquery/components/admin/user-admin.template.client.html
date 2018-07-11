@@ -10,6 +10,7 @@
     <link href="user-admin.style.client.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../../services/user.service.client.js"></script>
+    <script src="../../models/user.model.client.js"></script>
     <script src="user-admin.controller.client.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
@@ -35,6 +36,25 @@
 </nav>
 
 <div class="container-fluid" id="userAdmin">
+
+    <div class="container chase-edit-modal" id="userUpdated">
+        <div id="updateSuccess" class="alert alert-success" role="alert">
+            User updated!
+        </div>
+    </div>
+
+    <div class="container chase-edit-modal" id="userDeleted">
+        <div id="deleteSuccess" class="alert alert-danger" role="alert">
+            User deleted!
+        </div>
+    </div>
+
+    <div class="container chase-edit-modal" id="userCreated">
+        <div id="createSuccess" class="alert alert-success" role="alert">
+            User created!
+        </div>
+    </div>
+
     <h1>User Admin</h1>
     <div class="table-responsive">
         <table class="table">
@@ -159,7 +179,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Username is taken.  Please select a different username.
+                Username is taken. Please select a different username.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

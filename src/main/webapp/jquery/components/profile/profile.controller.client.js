@@ -1,12 +1,10 @@
 (function() {
 
     $(main)
-
-    var currentUserId
     
     var $editSuccess, $dismissNoLogin
 
-    var $noLogin
+    var $xNoLogin, $noLogin
 
     var $usernameFld
     var $firstNameFld, $lastNameFld
@@ -25,7 +23,10 @@
      */
     function main() {
 
-        $editSuccess = $('#editSuccess'), $dismissNoLogin = $('#dismissNoLogin')
+        $editSuccess = $('#editSuccess'), $xNoLogin = $('#xNoLogin'), $dismissNoLogin = $('#dismissNoLogin')
+        $xNoLogin.click(function() {
+            window.location.href = '../login/login.template.client.html'
+        })
         $dismissNoLogin.click(function() {
             window.location.href = '../login/login.template.client.html'
         })
@@ -73,16 +74,22 @@
      * Updates a user's profile based on new attributes passed in
      */
     function updateProfile() {
-        userService.updateProfile({
-            firstName: $firstNameFld.val(),
-            lastName: $lastNameFld.val(),
-            phone: $phoneFld.val(),
-            email: $emailFld.val(),
-            role: $roleFld.val(),
-            dateOfBirth: $dobFld.val()
-        }).then(function() {
+
+        var user = new User(
+            null,
+            null,
+            $firstNameFld.val(),
+            $lastNameFld.val(),
+            $emailFld.val(),
+            $phoneFld.val(),
+            $dobFld.val(),
+            $roleFld.val()
+        )
+
+        userService.updateProfile(user).then(function() {
             getProfile()
             $editSuccess.show()
+            hideAlert($editSuccess)
         })
     }
 
@@ -95,6 +102,16 @@
         }).catch(function() {
             alert('There was an error logging you out.')
         })
+    }
+
+    /**
+     * Hides an alert after 5 seconds
+     * 
+     * @param {alert} alert 
+     */
+    function hideAlert(alert) {
+        setTimeout(function() {
+            alert.hide()}, 5000)
     }
 
 })()
