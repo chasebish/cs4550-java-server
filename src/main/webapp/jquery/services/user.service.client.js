@@ -1,3 +1,6 @@
+/**
+ * The service client for the user-admin page.
+ */
 function AdminUserServiceClient() {
     this.createUser = createUser;
     this.validUsername = validUsername;
@@ -8,6 +11,12 @@ function AdminUserServiceClient() {
     this.url = '/api/user';
     var self = this;
 
+    /**
+     * Creates a new user in the database.
+     * 
+     * @param {User} user the user to be created
+     * @param {Function} callback called on success
+     */
     function createUser(user, callback) {
         return fetch(self.url, {
             method: 'POST',
@@ -19,6 +28,11 @@ function AdminUserServiceClient() {
         })
     }
 
+    /**
+     * Checks to see if a username is valid.
+     * 
+     * @param {string} username the username to be checked
+     */
     function validUsername(username) {
         return fetch(this.url + '/username', {
             method: 'POST',
@@ -28,13 +42,23 @@ function AdminUserServiceClient() {
         })
     }
 
+    /**
+     * Gets all current users in the database.
+     * 
+     * @param {Function} callback called on success
+     */
     function findAllUsers(callback) {
         return $.ajax({
             url: self.url,
             success: callback
         })
-    }
+    } 
 
+    /**
+     * Finds a user by their ID.
+     * 
+     * @param {number} userId the ID being searched for in the database.
+     */
     function findUserById(userId) {
         return fetch(self.url + '/' + userId)
             .then(function(response) {
@@ -42,6 +66,12 @@ function AdminUserServiceClient() {
             })
     }
 
+    /**
+     * Updates a user based on their ID.
+     * 
+     * @param {number} userId the ID of the user to be updated
+     * @param {User} user the user fields being sent to the database
+     */
     function updateUser(userId, user) {
         return fetch(self.url + '/' + userId, {
             method: 'PUT',
@@ -51,7 +81,13 @@ function AdminUserServiceClient() {
             }
         })
     }
-
+    
+    /**
+     * Deletes a user from the database.
+     * 
+     * @param {number} userId the ID of the user to be deleted
+     * @param {Function} callback called on success
+     */
     function deleteUser(userId, callback) {
         return fetch(self.url + '/' + userId,{
             method: 'DELETE',
@@ -61,6 +97,9 @@ function AdminUserServiceClient() {
      
 }
 
+/**
+ * The service client for users
+ */
 function UserService() {
     this.register = register
     this.validUsername = validUsername
@@ -71,6 +110,11 @@ function UserService() {
     
     this.url = '/api/user'
     
+    /**
+     * Registers a new user and adds them to the database.
+     * 
+     * @param {User} user the new user to be added
+     */
     function register(user) {
         return fetch(this.url + '/register', {
             method: 'POST',
@@ -82,6 +126,11 @@ function UserService() {
         })
     }
 
+    /**
+     * Checks to see if a username is valid.
+     * 
+     * @param {string} username 
+     */
     function validUsername(username) {
         return fetch(this.url + '/username', {
             method: 'POST',
@@ -91,6 +140,11 @@ function UserService() {
         })
     }
 
+    /**
+     * Logs a current user in.
+     * 
+     * @param {User} user 
+     */
     function login(user) {
         return fetch(this.url + '/login', {
             method: 'POST',
@@ -104,6 +158,9 @@ function UserService() {
         })
     }
 
+    /**
+     * Logs the current user out.
+     */
     function logout() {
         return fetch(this.url + '/logout', {
             method: 'POST',
@@ -111,6 +168,9 @@ function UserService() {
         })
     }
 
+    /**
+     * Fetches the profile of the user that is currently logged in
+     */
     function profile() {
         return fetch(this.url + '/profile', {
             method: 'GET',
@@ -120,6 +180,11 @@ function UserService() {
         })
     }
 
+    /**
+     * Updates the profile of the user that is currently logged in
+     * 
+     * @param {User} user 
+     */
     function updateProfile(user) {
         return fetch(this.url + '/profile', {
             method: 'PUT',

@@ -28,9 +28,9 @@ public class UserService {
 	 * Registers a user and saves their session
 	 * 
 	 * @param user
-	 *            - the User being registered
+	 *            the User being registered
 	 * @param session
-	 *            - the HttpSession to be saved so that the user stays logged in
+	 *            the HttpSession to be updated so that the user stays logged in
 	 * @return - the new User that has been created
 	 */
 	@PostMapping("/api/user/register")
@@ -40,6 +40,15 @@ public class UserService {
 		return currentUser;
 	}
 
+	/**
+	 * Logs a user in and saves their session
+	 * 
+	 * @param user
+	 *            the User being logged in
+	 * @param session
+	 *            the HttpSession to be updated so that the user stays logged in
+	 * @return - the User that has been logged in
+	 */
 	@PostMapping("/api/user/login")
 	public User login(@RequestBody User user, HttpSession session) {
 		user = userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
@@ -47,17 +56,40 @@ public class UserService {
 		return user;
 	}
 
+	/**
+	 * Logs a user out and invalidates their session
+	 * 
+	 * @param session
+	 *            the HttpSession to be invalidated
+	 */
 	@PostMapping("/api/user/logout")
 	public void logout(HttpSession session) {
 		session.invalidate();
 	}
 
+	/**
+	 * Checks to see if a user is logged in and gets their attributes Errors are
+	 * handled client-side
+	 * 
+	 * @param session
+	 *            the HttpSession with the current user saved
+	 * @return - the User that is currently logged in
+	 */
 	@GetMapping("/api/user/profile")
-	public Optional<User> checkLogin(HttpSession session) {
+	public User checkLogin(HttpSession session) {
 		User currentUser = (User) session.getAttribute("currentUser");
-		return userRepository.findById(currentUser.getId());
+		return userRepository.findById(currentUser.getId()).orElse(null);
 	}
-	
+
+	/**
+	 * Updates a User's profile
+	 * 
+	 * @param newUser
+	 *            the User object being passed in client-side
+	 * @param session
+	 *            the HttpSession with the current user saved
+	 * @return - the newly updated User
+	 */
 	@PutMapping("/api/user/profile")
 	public User updateProfile(@RequestBody User newUser, HttpSession session) {
 		User sessionUser = (User) session.getAttribute("currentUser");
@@ -65,7 +97,13 @@ public class UserService {
 		return this.updateUser(sessionUserId, newUser);
 	}
 
-
+	/**
+	 * Checks to see if a username is valid
+	 * 
+	 * @param username
+	 *            the username to be checked
+	 * @return - true -> username is valid, false -> username is invalid
+	 */
 	@PostMapping("/api/user/username")
 	public Boolean validUsername(@RequestBody String username) {
 		return userRepository.findUserByUsername(username) == null;
@@ -85,8 +123,8 @@ public class UserService {
 	 * Creates a new user
 	 * 
 	 * @param user
-	 *            - the new User object
-	 * @return - the User that has been created
+	 *           	the User object being passed in client-side
+	 * @return - the new User that has been created
 	 */
 	@PostMapping("/api/user")
 	public User createUser(@RequestBody User user) {
@@ -97,7 +135,7 @@ public class UserService {
 	 * Finds a user by their unique ID
 	 * 
 	 * @param id
-	 *            - the unique ID matching to a user
+	 *            the unique ID matching to a user
 	 * @return - the User that matches with the ID. If no match, returns null
 	 */
 	@GetMapping("/api/user/{userId}")
@@ -112,10 +150,10 @@ public class UserService {
 	 * Updates a user with new fields
 	 * 
 	 * @param id
-	 *            - the unique ID matching to a user
+	 *            the unique ID matching to a user
 	 * @param newUser
-	 *            - the new User object to update a current User
-	 * @return - the User that has been updated. If no match, returns null
+	 *            the User object being passed in client-side
+	 * @return - the User that has been updated
 	 */
 	@PutMapping("/api/user/{userId}")
 	public User updateUser(@PathVariable("userId") int id, @RequestBody User newUser) {
@@ -128,7 +166,7 @@ public class UserService {
 	 * Deletes a user
 	 * 
 	 * @param id
-	 *            - the unique ID matching to a user
+	 *            the unique ID matching to a user
 	 */
 	@DeleteMapping("/api/user/{userId}")
 	public void deleteUser(@PathVariable("userId") int id) {

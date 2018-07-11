@@ -4,6 +4,11 @@
 
     var $registerBtn, $loginBtn, $profileBtn, $adminBtn
 
+    /**
+     * Executes on document load, when the browser is done parsing the html page and the dom is ready. Retrieved
+     * the dom elements needed later in the controller such as the form elements, action icons, and templates.
+     * Binds action icons, such as create, update, select, and delete, to respective event handlers.
+     */
     function main() {
         $registerBtn = $('#registerBtn')
         $loginBtn = $('#loginBtn')

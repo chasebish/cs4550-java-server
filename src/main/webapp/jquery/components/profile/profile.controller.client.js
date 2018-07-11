@@ -18,6 +18,11 @@
 
     var userService = new UserService()
 
+    /**
+     * Executes on document load, when the browser is done parsing the html page and the dom is ready. Retrieved
+     * the dom elements needed later in the controller such as the form elements, action icons, and templates.
+     * Binds action icons, such as create, update, select, and delete, to respective event handlers.
+     */
     function main() {
 
         $editSuccess = $('#editSuccess'), $dismissNoLogin = $('#dismissNoLogin')
@@ -42,6 +47,10 @@
         getProfile()
     }
 
+    /**
+     * Gets the profile of the currently stored user.  If it successfully gets a user, it renders their profile
+     * with the values filled in.
+     */
     function getProfile() {
         userService.profile().then(function(user) {
             if (user === null) {
@@ -60,6 +69,9 @@
         })
     }
 
+    /**
+     * Updates a user's profile based on new attributes passed in
+     */
     function updateProfile() {
         userService.updateProfile({
             firstName: $firstNameFld.val(),
@@ -74,6 +86,9 @@
         })
     }
 
+    /**
+     * Logs a user out
+     */
     function logoutUser() {
         userService.logout().then(function() {
             window.location.href = '../login/login.template.client.html'

@@ -7,6 +7,11 @@
     var $createBtn
     var userService = new UserService()
 
+    /**
+     * Executes on document load, when the browser is done parsing the html page and the dom is ready. Retrieved
+     * the dom elements needed later in the controller such as the form elements, action icons, and templates.
+     * Binds action icons, such as create, update, select, and delete, to respective event handlers.
+     */
     function main() {
 
         $emptyFields = $('#emptyFields'), $samePassword = $('#samePassword'), $usernameTaken = $('#usernameTaken')
@@ -16,6 +21,9 @@
         $createBtn.click(createAccount)
     }
 
+    /**
+     * Wrapper for creating a new account.  Checks to make sure fields are valid.
+     */
     function createAccount() {
         if ($usernameFld.val() === '' || $passwordFld.val() === '' || $confirmPasswordFld.val() === '') {
             $emptyFields.modal('show')
@@ -27,6 +35,9 @@
         }
     }
 
+    /**
+     * Checks to see if the desired username is valid or not.
+     */
     function validUsername() {
 
         userService.validUsername($usernameFld.val()).then(function(isValid) {
@@ -38,6 +49,9 @@
         })
     }
 
+    /**
+     * Registers a new user.
+     */
     function register() { 
 
         var userObj = {
