@@ -122,7 +122,11 @@
         var deleteBtn = $(event.currentTarget)
         var userId = deleteBtn.parent().parent().parent().attr('id')
 
-        userService.deleteUser(userId).then(findAllUsers)
+        userService.deleteUser(userId).then(findAllUsers).then(function() {
+            if (userId === currentUserId) {
+                resetFields()
+            }
+        })
     }
 
     /**
