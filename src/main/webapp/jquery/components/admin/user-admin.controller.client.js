@@ -3,6 +3,7 @@
 
     var currentUserId
 
+    var $updateSuccess, $deleteSuccess, $createSuccess
     var $noUsername, $noPassword, $usernameTaken
 
     var $usernameFld, $passwordFld
@@ -20,6 +21,9 @@
      * Binds action icons, such as create, update, select, and delete, to respective event handlers.
      */
     function main() {
+
+        $updateSuccess = $('#updateSuccess'), $deleteSuccess = $('#deleteSuccess'), $createSuccess = $('#createSuccess')
+        $updateSuccess.hide(), $deleteSuccess.hide(), $createSuccess.hide()
 
         $noUsername = $('#noUsername'), $noPassword = $('#noPassword'), $usernameTaken = $('#usernameTaken')
 
@@ -68,7 +72,12 @@
                         phone: $phoneFld.val(),
                         dateOfBirth: $dobFld.val(),
                         role: $roleFld.val()
-                    }, resetFields()).then(findAllUsers)
+                    }, resetFields()).then(function() {
+                        findAllUsers()
+                        $createSuccess.show()
+                        $deleteSuccess.hide()
+                        $updateSuccess.hide()
+                    })
 
                 }
             })
@@ -126,11 +135,14 @@
             if (userId === currentUserId) {
                 resetFields()
             }
+            $deleteSuccess.show()
+            $updateSuccess.hide()
+            $createSuccess.hide()
         })
     }
 
     /**
-     * Selects a current user and updates the input form with properties
+     * Selects a current user and updates the input form with properties.  Can also be called renderUser()
      */
     function selectUser() {
 
@@ -176,6 +188,9 @@
         }).then(function() {
             resetFields()
             findAllUsers()
+            $updateSuccess.show()
+            $deleteSuccess.hide()
+            $createSuccess.hide()
         })
 
     }

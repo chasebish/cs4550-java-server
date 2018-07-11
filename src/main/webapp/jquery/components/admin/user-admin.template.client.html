@@ -35,6 +35,25 @@
 </nav>
 
 <div class="container-fluid" id="userAdmin">
+
+    <div class="container chase-edit-modal" id="userUpdated">
+        <div id="updateSuccess" class="alert alert-success" role="alert">
+            User updated!
+        </div>
+    </div>
+
+    <div class="container chase-edit-modal" id="userDeleted">
+        <div id="deleteSuccess" class="alert alert-danger" role="alert">
+            User deleted!
+        </div>
+    </div>
+
+    <div class="container chase-edit-modal" id="userCreated">
+        <div id="createSuccess" class="alert alert-success" role="alert">
+            User created!
+        </div>
+    </div>
+
     <h1>User Admin</h1>
     <div class="table-responsive">
         <table class="table">
@@ -159,7 +178,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Username is taken.  Please select a different username.
+                Username is taken. Please select a different username.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
