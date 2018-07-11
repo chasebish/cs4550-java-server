@@ -40,7 +40,7 @@
      */
     function validUsername() {
 
-        userService.validUsername($usernameFld.val()).then(function(isValid) {
+        userService.validUsername($usernameFld.val()).then(function (isValid) {
             if (!isValid) {
                 $usernameTaken.modal('show')
             } else {
@@ -52,11 +52,11 @@
     /**
      * Registers a new user.
      */
-    function register() { 
+    function register() {
 
         var user = new User($usernameFld.val(), $passwordFld.val(), null, null, null, null, null, null)
 
-        userService.register(user).then(function() { window.location.href = '../profile/profile.template.client.html' })
+        userService.register(user).then(function () { window.location.href = '../profile/profile.template.client.html' })
     }
 
 })();

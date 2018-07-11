@@ -1,7 +1,7 @@
-(function() {
+(function () {
 
     $(main)
-    
+
     var $editSuccess, $dismissNoLogin
 
     var $xNoLogin, $noLogin
@@ -24,10 +24,10 @@
     function main() {
 
         $editSuccess = $('#editSuccess'), $xNoLogin = $('#xNoLogin'), $dismissNoLogin = $('#dismissNoLogin')
-        $xNoLogin.click(function() {
+        $xNoLogin.click(function () {
             window.location.href = '../login/login.template.client.html'
         })
-        $dismissNoLogin.click(function() {
+        $dismissNoLogin.click(function () {
             window.location.href = '../login/login.template.client.html'
         })
 
@@ -53,7 +53,7 @@
      * with the values filled in.
      */
     function getProfile() {
-        userService.profile().then(function(user) {
+        userService.profile().then(function (user) {
             if (user === null) {
                 $noLogin.modal('show')
             } else if (user.id) {
@@ -86,7 +86,7 @@
             $roleFld.val()
         )
 
-        userService.updateProfile(user).then(function() {
+        userService.updateProfile(user).then(function () {
             getProfile()
             $editSuccess.show()
             hideAlert($editSuccess)
@@ -97,9 +97,9 @@
      * Logs a user out
      */
     function logoutUser() {
-        userService.logout().then(function() {
+        userService.logout().then(function () {
             window.location.href = '../login/login.template.client.html'
-        }).catch(function() {
+        }).catch(function () {
             alert('There was an error logging you out.')
         })
     }
@@ -110,8 +110,9 @@
      * @param {alert} alert 
      */
     function hideAlert(alert) {
-        setTimeout(function() {
-            alert.hide()}, 5000)
+        setTimeout(function () {
+            alert.hide()
+        }, 5000)
     }
 
 })()

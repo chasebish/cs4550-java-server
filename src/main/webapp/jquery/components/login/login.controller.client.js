@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     $(main)
 
@@ -31,9 +31,9 @@
         var user = new User($usernameFld.val(), $passwordFld.val(), null, null, null, null, null, null)
 
         userService.login(user)
-            .then(function(out) {
+            .then(function (out) {
                 window.location.href = '../profile/profile.template.client.html'
-            }, function() {
+            }, function () {
                 $invalidUser.modal('show')
             })
     }

@@ -27,10 +27,10 @@
 
         $noUsername = $('#noUsername'), $noPassword = $('#noPassword'), $usernameTaken = $('#usernameTaken')
 
-        $usernameFld = $('#usernameFld'), $passwordFld=$('#passwordFld')
-        $firstNameFld = $('#firstNameFld'), $lastNameFld=$('#lastNameFld')
-        $emailFld = $('#emailFld'), $phoneFld=$('#phoneFld'), $dobFld=$('#dobFld')
-        $roleFld =$ ('#roleFld')
+        $usernameFld = $('#usernameFld'), $passwordFld = $('#passwordFld')
+        $firstNameFld = $('#firstNameFld'), $lastNameFld = $('#lastNameFld')
+        $emailFld = $('#emailFld'), $phoneFld = $('#phoneFld'), $dobFld = $('#dobFld')
+        $roleFld = $('#roleFld')
         $tbody = $('.wbdv-tbody')
         $userRowTemplate = $('.wbdv-template.wbdv-user').clone().removeClass('wbdv-hidden')
         $createBtn = $('.wbdv-create')
@@ -55,10 +55,10 @@
 
         if ($usernameFld.val() === '') {
             $noUsername.modal('show')
-        } else if($passwordFld.val() === '') {
+        } else if ($passwordFld.val() === '') {
             $noPassword.modal('show')
         } else {
-            userService.validUsername($usernameFld.val()).then(function(isValid) {
+            userService.validUsername($usernameFld.val()).then(function (isValid) {
                 if (!isValid) {
                     $usernameTaken.modal('show')
                 } else {
@@ -74,7 +74,7 @@
                         $roleFld.val()
                     )
 
-                    userService.createUser(user, resetFields()).then(function() {
+                    userService.createUser(user, resetFields()).then(function () {
                         findAllUsers()
                         $createSuccess.show()
                         $deleteSuccess.hide()
@@ -111,7 +111,7 @@
      * Called whenever the list of users needs to be refreshed. Uses user service findAllUsers() to retrieve all
      * the users and passes response to renderUsers.
      */
-    function findAllUsers() { 
+    function findAllUsers() {
         userService.findAllUsers().then(renderUsers)
     }
 
@@ -120,21 +120,21 @@
      * Reads the user is from the icon id attribute. Uses user service findUserById() to retrieve user and then
      * updates the form on server response.
      */
-    function findUserById(id) { 
-        return userService.findUserById(id).then(function(user) {
+    function findUserById(id) {
+        return userService.findUserById(id).then(function (user) {
             return user
         })
-     }
+    }
 
     /**
      * Handles delete user event when user clicks the cross icon. Reads the user is from the icon id attribute. Uses
      * user service deleteUser() to send a delete request to the server. Updates user list on server response.
      */
-    function deleteUser() { 
+    function deleteUser() {
         var deleteBtn = $(event.currentTarget)
         var userId = deleteBtn.parent().parent().parent().attr('id')
 
-        userService.deleteUser(userId).then(findAllUsers).then(function() {
+        userService.deleteUser(userId).then(findAllUsers).then(function () {
             if (userId === currentUserId) {
                 resetFields()
             }
@@ -161,7 +161,7 @@
         var userId = selectedUser.attr('id')
         currentUserId = userId
 
-        findUserById(userId).then(function(user) {
+        findUserById(userId).then(function (user) {
             $usernameFld.val(user.username)
             $passwordFld.val(user.password)
             $firstNameFld.val(user.firstName)
@@ -192,7 +192,7 @@
             $roleFld.val()
         )
 
-        userService.updateUser(currentUserId, user).then(function() {
+        userService.updateUser(currentUserId, user).then(function () {
             resetFields()
             findAllUsers()
             $updateSuccess.show()
@@ -212,8 +212,8 @@
     function renderUsers(users) {
 
         $tbody.empty()
-        
-        for(var u in users) {
+
+        for (var u in users) {
             var user = users[u]
             var $row = $userRowTemplate.clone()
 
@@ -241,7 +241,8 @@
      * @param {alert} alert 
      */
     function hideAlert(alert) {
-        setTimeout(function() {
-            alert.hide()}, 5000)
+        setTimeout(function () {
+            alert.hide()
+        }, 5000)
     }
 })()

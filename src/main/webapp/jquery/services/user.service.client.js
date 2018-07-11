@@ -37,7 +37,7 @@ function AdminUserServiceClient() {
         return fetch(this.url + '/username', {
             method: 'POST',
             body: username
-        }).then(function(response) {
+        }).then(function (response) {
             return response.json()
         })
     }
@@ -52,7 +52,7 @@ function AdminUserServiceClient() {
             url: self.url,
             success: callback
         })
-    } 
+    }
 
     /**
      * Finds a user by their ID.
@@ -61,7 +61,7 @@ function AdminUserServiceClient() {
      */
     function findUserById(userId) {
         return fetch(self.url + '/' + userId)
-            .then(function(response) {
+            .then(function (response) {
                 return response.json();
             })
     }
@@ -81,7 +81,7 @@ function AdminUserServiceClient() {
             }
         })
     }
-    
+
     /**
      * Deletes a user from the database.
      * 
@@ -89,12 +89,12 @@ function AdminUserServiceClient() {
      * @param {Function} callback called on success
      */
     function deleteUser(userId, callback) {
-        return fetch(self.url + '/' + userId,{
+        return fetch(self.url + '/' + userId, {
             method: 'DELETE',
             success: callback
         })
     }
-     
+
 }
 
 /**
@@ -107,9 +107,9 @@ function UserService() {
     this.profile = profile
     this.updateProfile = updateProfile
     this.logout = logout
-    
+
     this.url = '/api/user'
-    
+
     /**
      * Registers a new user and adds them to the database.
      * 
@@ -135,7 +135,7 @@ function UserService() {
         return fetch(this.url + '/username', {
             method: 'POST',
             body: username
-        }).then(function(response) {
+        }).then(function (response) {
             return response.json()
         })
     }
@@ -153,7 +153,7 @@ function UserService() {
             headers: {
                 "Content-Type": "application/json"
             }
-        }).then(function(response) {
+        }).then(function (response) {
             return response.json()
         })
     }
@@ -175,7 +175,7 @@ function UserService() {
         return fetch(this.url + '/profile', {
             method: 'GET',
             credentials: 'include'
-        }).then(function(response) {
+        }).then(function (response) {
             return response.json()
         })
     }
@@ -195,5 +195,5 @@ function UserService() {
             }
         })
     }
-  }
-  
+}
+
