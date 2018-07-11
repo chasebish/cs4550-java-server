@@ -6,13 +6,35 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="../../../index.css" rel="stylesheet" />
     <link href="login.style.client.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../../services/user.service.client.js"></script>
     <script src="login.controller.client.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
 </head>
 
-<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light chase-nav">
+    <a class="navbar-brand" href="../../../index.html">Assignment 1</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="../../../index.html">Home</a>
+            <a class="nav-item nav-link" href="../register/register.template.client.html">Register</a>
+            <a class="nav-item nav-link" href="">Login</a>
+            <a class="nav-item nav-link" href="../profile/profile.template.client.html">Profile</a>
+            <a class="nav-item nav-link" href="../admin/user-admin.template.client.html">User Admin</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container chase-container">
     <h1>Login</h1>
     <div>
         <div class="form-group row">

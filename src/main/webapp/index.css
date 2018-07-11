@@ -1,10 +1,8 @@
-html {
-    padding: 30px;
-}
 
 #buttonContainer {
     background-color: rgb(210, 231, 255, .25);
     border-radius: 10px;
+    margin-top: 50px;
     padding: 50px;
 }
 
@@ -14,4 +12,21 @@ html {
 
 .chase-btn {
     width: 180px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.chase-nav {
+    background-color: rgb(210, 231, 255, .25);
+}
+
+.chase-container {
+    background-color: rgb(210, 231, 255, .25);
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+body {
+    background-color: rgba(237, 255, 232, .5)
 }
