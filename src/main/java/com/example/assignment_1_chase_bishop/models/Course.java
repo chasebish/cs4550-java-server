@@ -1,6 +1,6 @@
 package com.example.assignment_1_chase_bishop.models;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.*;
 
