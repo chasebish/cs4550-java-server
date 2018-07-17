@@ -1,6 +1,7 @@
 package com.example.assignment_1_chase_bishop.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -15,9 +16,20 @@ public class Course {
 	private Date created;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
-	
+	@OneToMany(mappedBy = "course")
+	private List<Module> modules;
+
 	public void setCourse(Course newCourse) {
-		return;
+		this.title = newCourse.title != null ? newCourse.title : this.title;
+		this.modified = newCourse.modified != null ? newCourse.modified : this.modified;
+	}
+
+	public List<Module> getModules() {
+		return modules;
+	}
+
+	public void setModules(List<Module> modules) {
+		this.modules = modules;
 	}
 
 	public int getId() {

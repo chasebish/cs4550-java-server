@@ -3,6 +3,7 @@ package com.example.assignment_1_chase_bishop.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import com.example.assignment_1_chase_bishop.models.Course;
 import com.example.assignment_1_chase_bishop.repositories.CourseRepository;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge=3600)
 public class CourseService {
 	
 	@Autowired
@@ -22,7 +24,8 @@ public class CourseService {
 	
 	@PostMapping("/api/course")
 	public Course createCourse(@RequestBody Course course) {
-		return null;
+		Course currentCourse = courseRepository.save(course);
+		return currentCourse;
 	}
 	
 	@DeleteMapping("/api/course/{courseId}")
