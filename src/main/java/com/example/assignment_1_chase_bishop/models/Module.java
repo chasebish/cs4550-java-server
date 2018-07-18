@@ -1,5 +1,7 @@
 package com.example.assignment_1_chase_bishop.models;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,10 +15,20 @@ public class Module {
 	@ManyToOne
 	@JsonIgnore
 	private Course course;
-	
+	@OneToMany(mappedBy = "module")
+	private List<Lesson> lessons;
+
 	public void setModule(Module newModule) {
 		this.title = newModule.title != null ? newModule.title : this.title;
-		this.course = newModule.course != null ? newModule.course: this.course;
+		this.course = newModule.course != null ? newModule.course : this.course;
+	}
+
+	public List<Lesson> getLessons() {
+		return lessons;
+	}
+
+	public void setLessons(List<Lesson> lessons) {
+		this.lessons = lessons;
 	}
 
 	public int getId() {
