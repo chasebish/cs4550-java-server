@@ -16,12 +16,22 @@ public class Course {
 	private Date created;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
+	private String owner;
 	@OneToMany(mappedBy = "course")
 	private List<Module> modules;
 
 	public void setCourse(Course newCourse) {
 		this.title = newCourse.title != null ? newCourse.title : this.title;
 		this.modified = newCourse.modified != null ? newCourse.modified : this.modified;
+		this.owner = newCourse.owner != null ? newCourse.owner : this.owner;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
 	}
 
 	public List<Module> getModules() {
