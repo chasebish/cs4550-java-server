@@ -1,5 +1,7 @@
 package com.example.assignment_1_chase_bishop.models;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,6 +15,8 @@ public class Lesson {
 	@ManyToOne
 	@JsonIgnore
 	private Module module;
+	@OneToMany(mappedBy = "lesson")
+	private List<Topic> topics;
 
 	public void setLesson(Lesson newLesson) {
 		this.title = newLesson.title != null ? newLesson.title : this.title;
