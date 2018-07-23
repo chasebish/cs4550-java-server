@@ -22,6 +22,15 @@ public class Lesson {
 		this.title = newLesson.title != null ? newLesson.title : this.title;
 		this.module = newLesson.module != null ? newLesson.module : this.module;
 	}
+	
+
+	public List<Topic> getTopics() {
+		return topics;
+	}
+
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
+	}
 
 	public int getId() {
 		return id;
