@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.assignment_1_chase_bishop.models.Lesson;
-import com.example.assignment_1_chase_bishop.models.Module;
 import com.example.assignment_1_chase_bishop.models.Topic;
 import com.example.assignment_1_chase_bishop.repositories.CourseRepository;
 import com.example.assignment_1_chase_bishop.repositories.LessonRepository;
