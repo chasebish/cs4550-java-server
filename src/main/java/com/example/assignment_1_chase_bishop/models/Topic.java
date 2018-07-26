@@ -1,10 +1,13 @@
 package com.example.assignment_1_chase_bishop.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,6 +20,8 @@ public class Topic {
 	@ManyToOne
 	@JsonIgnore
 	private Lesson lesson;
+	@OneToMany(mappedBy = "topic")
+	private List<Widget> widgets;
 
 	public void setTopic(Topic newTopic) {
 		this.title = newTopic.title != null ? newTopic.title : this.title;
