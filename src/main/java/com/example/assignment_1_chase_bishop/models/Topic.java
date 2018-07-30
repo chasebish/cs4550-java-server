@@ -27,25 +27,37 @@ public class Topic {
 		this.title = newTopic.title != null ? newTopic.title : this.title;
 		this.lesson = newTopic.lesson != null ? newTopic.lesson : this.lesson;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public Lesson getLesson() {
 		return lesson;
 	}
+
 	public void setLesson(Lesson lesson) {
 		this.lesson = lesson;
 	}
-	
-	
+
+	public List<Widget> getWidgets() {
+		return widgets;
+	}
+
+	public void setWidgets(List<Widget> widgets) {
+		this.widgets = widgets;
+	}
+
 }
