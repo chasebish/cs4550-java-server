@@ -90,4 +90,24 @@ public class WidgetService {
 
 	}
 
+	@PostMapping("/api/topic/{topicId}/widget")
+	public void saveAllWidgets(@PathVariable("topicId") String topicId, @RequestBody List<Widget> widgets) {
+
+		int intId = Integer.parseInt(topicId);
+		Optional<Topic> data = topicRepository.findById(intId);
+
+		if (data.isPresent()) {
+			Topic topic = data.get();
+
+			List<Widget> toDelete = topic.getWidgets();
+			for (Widget widget : toDelete) {
+				widgetRepository.delete(widget);
+			}
+			for (Widget widget : widgets) {
+				widget.setTopic(topic);
+				widgetRepository.save(widget);
+			}
+		}
+	}
+
 }
