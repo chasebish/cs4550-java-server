@@ -9,8 +9,8 @@ public class Widget {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	private int order;
 	private String name;
-	private int widgetOrder;
 	private String text;
 	private String className;
 	private String style;
@@ -29,7 +29,7 @@ public class Widget {
 	
 	public void setWidget(Widget newWidget) {
 		this.size = newWidget.size != 0 ? newWidget.size : this.size;
-		this.widgetOrder = newWidget.widgetOrder != 0 ? newWidget.widgetOrder : this.widgetOrder;
+		this.order = newWidget.order != 0 ? newWidget.order : this.order;
 		this.name = newWidget.name != null ? newWidget.name : this.name;
 		this.text = newWidget.text != null ? newWidget.text : this.text;
 		this.className = newWidget.className != null ? newWidget.className : this.className;
@@ -60,11 +60,11 @@ public class Widget {
 	}
 
 	public int getWidgetOrder() {
-		return widgetOrder;
+		return order;
 	}
 	
 	public void setWidgetOrder(int widgetOrder) {
-		this.widgetOrder = widgetOrder;
+		this.order = widgetOrder;
 	}
 
 	public String getText() {
