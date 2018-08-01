@@ -91,7 +91,7 @@ public class WidgetService {
 	}
 
 	@PostMapping("/api/topic/{topicId}/widget")
-	public void saveAllWidgets(@PathVariable("topicId") String topicId, @RequestBody List<Widget> widgets) {
+	public List<Widget> saveAllWidgets(@PathVariable("topicId") String topicId, @RequestBody List<Widget> widgets) {
 
 		int intId = Integer.parseInt(topicId);
 		Optional<Topic> data = topicRepository.findById(intId);
@@ -107,7 +107,11 @@ public class WidgetService {
 				widget.setTopic(topic);
 				widgetRepository.save(widget);
 			}
+			
+			return topic.getWidgets();
+			
 		}
+		return null;
 	}
 
 }
